@@ -23,7 +23,7 @@ namespace BallsToCup.General.Popups
     public class OrientationInfo
     {
         #region Fields
-
+        
         public Orientation orientation;
         public float width;
         public float height;

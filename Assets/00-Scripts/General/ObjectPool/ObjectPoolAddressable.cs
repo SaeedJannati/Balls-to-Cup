@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace BtcLogger.General
+namespace BallsToCup.General
 {
     public class ObjectPoolAddressable<T> : ObjectPool<T> where T : MonoBehaviour
     {

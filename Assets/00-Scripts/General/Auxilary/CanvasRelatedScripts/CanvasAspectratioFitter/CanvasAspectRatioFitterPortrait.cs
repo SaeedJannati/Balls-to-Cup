@@ -1,4 +1,5 @@
 using System.Linq;
+using NaughtyAttributes;
 using UnityEngine;
 namespace BallsToCup.General.Popups
 {
@@ -6,7 +7,7 @@ public class CanvasAspectRatioFitterPortrait : CanvasAspectRatioFitter
 {
     #region Fields
 
-    [SerializeField] AspectRatioData _criterionAspectRatio;
+    [SerializeField,Expandable] AspectRatioData _criterionAspectRatio;
 
     #endregion
 

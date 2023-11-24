@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace BtcLogger.General
+namespace BallsToCup.General
 {
     public class ObjectPoolFactory<T> : ObjectPool<T> where T : MonoBehaviour
     {

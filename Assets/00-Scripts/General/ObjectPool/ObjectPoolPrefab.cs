@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BtcLogger.General
+namespace BallsToCup.General
 {
     public class ObjectPoolPrefab<T> : ObjectPool<T> where T : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-using Sirenix.OdinInspector;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace  BallsToCup.General
@@ -6,11 +6,11 @@ namespace  BallsToCup.General
     public class OrthoResponsiveCamera : MonoBehaviour
 {
     #region Fields
-    [SerializeField] private OrthoCameraSizeModel _model;
+    [SerializeField,Expandable] private OrthoCameraSizeModel _model;
     private Camera _camera;
     [SerializeField] private bool hasScalePreference;
 
-    [ShowIf(nameof(hasScalePreference)), SerializeField]
+    [Sirenix.OdinInspector.ShowIf(nameof(hasScalePreference)), SerializeField]
     private bool isHeightPreferred; 
     #endregion
      #region Monobehaviour callbacks
@@ -60,7 +60,7 @@ namespace  BallsToCup.General
          _camera.orthographicSize = destCamSize;
      }
 
-     [Button]
+     [Sirenix.OdinInspector.Button]
      void SetCameraSizeBasedOnScreenRatio()
      {
          var referenceRatio = _model.referenceWidth / _model.ReferenceHeight;

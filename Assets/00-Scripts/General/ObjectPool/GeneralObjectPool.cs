@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = System.Object;
 
-namespace BtcLogger.General
+namespace BallsToCup.General
 {
     public class GeneralObjectPool : IDisposable
     {
