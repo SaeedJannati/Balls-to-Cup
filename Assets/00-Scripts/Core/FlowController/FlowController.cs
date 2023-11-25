@@ -19,10 +19,21 @@ namespace BallsToCup.Core.Gameplay
 
         public void Dispose()
         {
+            UnregisterFromEvents();
             _eventController.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public void Initialize()
+        {
+            RegisterToEvents();
+        }
+
+        private void RegisterToEvents()
+        {
+        }
+
+        private void UnregisterFromEvents()
         {
         }
 

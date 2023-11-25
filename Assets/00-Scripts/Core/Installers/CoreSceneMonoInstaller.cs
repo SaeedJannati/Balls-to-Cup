@@ -1,3 +1,4 @@
+using BallsToCup.Core.Gameplay;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +9,7 @@ namespace BallsToCup.Core.Installers
         #region Fields
 
         [SerializeField] private SwipeInput _swipeInput;
-        
+        [SerializeField] private BallGenerator _ballGenerator;
 
         #endregion
 
@@ -21,12 +22,13 @@ namespace BallsToCup.Core.Installers
 
         private void BindInstallers()
         {
-           
+           CoreSceneGeneralInstaller.Install(Container);
         }
 
         private void BindInterfaces()
         {
-            Container.Bind<IDraggable>().FromInstance(_swipeInput);
+            Container.Bind<IDraggable>().FromInstance(_swipeInput).AsSingle();
+            Container.Bind<BallGenerator>().FromInstance(_ballGenerator).AsSingle();
         }
 
         #endregion

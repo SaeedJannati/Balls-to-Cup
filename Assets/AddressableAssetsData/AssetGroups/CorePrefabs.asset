@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CorePrefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: CorePrefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e5f680fdbbb6915448cb266fc7ebf0d1
+  m_SerializeEntries:
+  - m_GUID: febd288bee21b5945af3e7d07bcac58a
+    m_Address: Assets/05-Prefabs/Core/Ball/Ball.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9346bd039b6edef4abf9c790adb02889, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 51a22c72d72c0984eb21a536d988ccd7, type: 2}
+    - {fileID: 11400000, guid: c2f77328a99f0984099dc0dad6705096, type: 2}
