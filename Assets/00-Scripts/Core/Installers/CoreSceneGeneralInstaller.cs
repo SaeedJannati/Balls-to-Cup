@@ -16,6 +16,7 @@ namespace BallsToCup.Core.Installers
         private void BindEventControllers()
         {
             
+            
         }
 
         private void BindManagers()
