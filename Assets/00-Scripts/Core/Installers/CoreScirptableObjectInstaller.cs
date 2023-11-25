@@ -2,7 +2,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 
-namespace BallsToCup.Core
+namespace BallsToCup.Core.Installers
 {
     public class CoreScirptableObjectInstaller : ScriptableObjectInstaller<CoreScirptableObjectInstaller>
     {

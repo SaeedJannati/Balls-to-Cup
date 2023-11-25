@@ -1,29 +1,28 @@
 using UnityEngine;
 using Zenject;
 
-namespace BallsToCup.Core
+namespace BallsToCup.Core.Installers
 {
-    public class CoreSceneGeneralInstaller : MonoInstaller
+    public class CoreSceneGeneralInstaller : Installer<CoreSceneGeneralInstaller>
     {
-        #region Fields
-
-        [SerializeField] private SwipeInput _swipeInput;
-        
-
-        #endregion
-
         #region Methods
+
         public override void InstallBindings()
         {
-            BindInterfaces();
+            BindManagers();
+            BindEventControllers();
         }
 
-        private void BindInterfaces()
+        private void BindEventControllers()
         {
-            Container.Bind<IDraggable>().FromInstance(_swipeInput);
+            
+        }
+
+        private void BindManagers()
+        {
+      
         }
 
         #endregion
-     
     }
 }
