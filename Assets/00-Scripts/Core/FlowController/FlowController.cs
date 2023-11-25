@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Threading.Tasks;
 using Zenject;
-using IInitializable = Unity.VisualScripting.IInitializable;
 
 namespace BallsToCup.Core.Gameplay
 {
@@ -12,6 +9,7 @@ namespace BallsToCup.Core.Gameplay
         #region Fields
 
         [Inject] private FlowControllerEventController _eventController;
+        [Inject] private LevelManagerEventController _levelManagerEventController;
 
         #endregion
 
@@ -27,6 +25,19 @@ namespace BallsToCup.Core.Gameplay
         public void Initialize()
         {
             RegisterToEvents();
+       
+        }
+
+        [Inject]
+        void Initialise()
+        {
+            CreateLevel();
+        }
+
+        private async void CreateLevel()
+        {
+            await Task.Yield();
+            _levelManagerEventController.onCreateTubeRequest.Trigger();
         }
 
         private void RegisterToEvents()

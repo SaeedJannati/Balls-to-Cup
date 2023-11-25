@@ -34,7 +34,7 @@ namespace BallsToCup.Core.Gameplay
 
         private void ChooseLevel()
         {
-            _currentLevelIndex = _prefHandler.GetPref(PrefKeys.LevelKeys.playerLevelKey, 0);
+            _currentLevelIndex = _prefHandler.GetPref(PrefKeys.LevelKeys.playerLevelKey, 2);
             _currentLevel = _model.levels.FirstOrDefault(i => i.index == _currentLevelIndex);
             if (_currentLevel == default)
                 throw new Exception($"No such level with index {_currentLevelIndex} exists!");
