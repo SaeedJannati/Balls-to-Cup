@@ -61,6 +61,7 @@ namespace BallsToCup.Core.Gameplay
             view.tubePivot.position = new Vector3(0, currentLevel.tubeDistanceToGround,0 );
             _tubeLogicFactory.Create(view);
             currentLevel.tube.ReleaseAsset();
+            _levelManagerEventController.onTubeCreated.Trigger();
         }
 
         #endregion

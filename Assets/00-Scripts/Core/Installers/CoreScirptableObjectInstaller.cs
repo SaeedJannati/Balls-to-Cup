@@ -11,7 +11,7 @@ namespace BallsToCup.Core.Installers
 
         [SerializeField, Expandable] private TubeRotatorModel _tubeRotatorModel;
         [SerializeField, Expandable] private LevelManagerModel _levelManagerModel;
-
+        [SerializeField, Expandable] private BallGeneratorModel _ballGeneratorModel;
         #endregion
 
         #region Methods
@@ -20,6 +20,7 @@ namespace BallsToCup.Core.Installers
         {
             Container.Bind<TubeRotatorModel>().FromScriptableObject(_tubeRotatorModel).AsSingle();
             Container.Bind<LevelManagerModel>().FromScriptableObject(_levelManagerModel).AsSingle();
+            Container.Bind<BallGeneratorModel>().FromScriptableObject(_ballGeneratorModel).AsSingle();
         }
 
         #endregion

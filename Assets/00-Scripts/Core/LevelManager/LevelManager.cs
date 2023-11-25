@@ -45,6 +45,7 @@ namespace BallsToCup.Core.Gameplay
         {
             _eventController.onCurrentLevelRotateControllInfoRequest.Add(OnCurrentLevelRotateControlInfoRequest);
             _eventController.onCurrentLevelRequest.Add(OnCurrentLevelRequest);
+            _eventController.onTubeCreated.Add(OnTubeCreated);
             
         }
 
@@ -52,6 +53,12 @@ namespace BallsToCup.Core.Gameplay
         {
             _eventController.onCurrentLevelRotateControllInfoRequest.Remove(OnCurrentLevelRotateControlInfoRequest);
             _eventController.onCurrentLevelRequest.Remove(OnCurrentLevelRequest);
+            _eventController.onTubeCreated.Remove(OnTubeCreated);
+        }
+
+        private void OnTubeCreated()
+        {
+            _eventController.onGenerateBallsRequest.Trigger();
         }
 
         private BallsToCupLevel OnCurrentLevelRequest() => _currentLevel;

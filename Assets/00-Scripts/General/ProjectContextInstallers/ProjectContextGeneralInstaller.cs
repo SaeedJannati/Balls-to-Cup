@@ -18,6 +18,8 @@ namespace BallsToCup.General
         private void BindManagers()
         {
             Container.BindInterfacesAndSelfTo<PrefHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AddressableLoader>().AsSingle();
+            
         }
     }
 }

@@ -17,6 +17,7 @@ namespace BallsToCup.Core.Gameplay
         [field: SerializeField] public float controllerSensitivity { get; private set; } = 1.0f;
         [field: SerializeField] public float ballDiameter { get; private set; } = .15f;
         [field: SerializeField] public float ballsFriction { get; private set; } = .6f;
+        [field: SerializeField] public float ballsBounce { get; private set; } = 0.0f;
         [field: SerializeField] public float ballMass { get; private set; } = 1.0f;
         [field: SerializeField] public float gravity { get; private set; } =9.81f;
         [field: SerializeField] public float tubeDistanceToGround { get; private set; }

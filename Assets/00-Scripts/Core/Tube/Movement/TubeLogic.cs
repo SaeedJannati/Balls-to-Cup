@@ -67,6 +67,7 @@ public class TubeLogic : IDisposable
 
   private void RegisterToEvents()
   {
+    _eventController.onPivotTransformRequest.Add(OnPivotTransformRequest);
     if (_draggable == default)
       return;
     _draggable.onDrag += OnDrag;
@@ -75,11 +76,16 @@ public class TubeLogic : IDisposable
 
   private void UnregisterFromEvent()
   {
+    _eventController.onPivotTransformRequest.Remove(OnPivotTransformRequest);
     if (_draggable == default)
       return;
     _draggable.onDrag -= OnDrag;
     _draggable.onDragDelta -= OnDragDelta;
   }
+
+  private Vector3 OnPivotTransformRequest() => _view.tubePivot.position;
+
+
   void GetPivotPosOnScreen()
   {
     _pivotPointOnScreen = _camera.WorldToScreenPoint(_view.tubePivot.position);
