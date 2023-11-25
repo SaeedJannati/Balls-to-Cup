@@ -4,6 +4,7 @@ using BallsToCup.General.Editor;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace BallsToCup.Core.Gameplay
 {
@@ -11,7 +12,7 @@ namespace BallsToCup.Core.Gameplay
     {
         #region Properties
 
-        [SerializeField,InspectorReadOnly] private int index;
+        [SerializeField,InspectorReadOnly] public int index;
         [field: SerializeField] public int ballsCount { get; private set; }
         [field: SerializeField] public float controllerSensitivity { get; private set; } = 1.0f;
         [field: SerializeField] public float ballDiameter { get; private set; } = .15f;
@@ -20,6 +21,7 @@ namespace BallsToCup.Core.Gameplay
         [field: SerializeField] public float gravity { get; private set; } =9.81f;
         [field: SerializeField] public float tubeDistanceToGround { get; private set; }
         [field: SerializeField] public List<StarRatio> starRatios { get; private set; } = new();
+        [field: SerializeField] public AssetReference tube { get; private set; } = new();
 
         #endregion
 

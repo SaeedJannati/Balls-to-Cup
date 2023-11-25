@@ -11,18 +11,27 @@ namespace BallsToCup.Core.Installers
         {
             BindManagers();
             BindEventControllers();
+            BindFactories();
+        }
+
+        private void BindFactories()
+        {
+            Container.BindFactory<TubeView, TubeLogic, TubeLogic.Factory>();
         }
 
         private void BindEventControllers()
         {
-            Container.Bind<FlowControllerEventController>().AsSingle();
-            Container.Bind<LevelManagerEventController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FlowControllerEventController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<LevelManagerEventController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TubeEventController>().AsTransient();
         }
 
         private void BindManagers()
         {
             Container.BindInterfacesAndSelfTo<FlowController>().AsSingle();
             Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TubeGenerator>().AsSingle();
+            
         }
 
         #endregion
