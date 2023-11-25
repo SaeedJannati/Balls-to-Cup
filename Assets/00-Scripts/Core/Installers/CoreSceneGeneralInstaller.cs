@@ -20,7 +20,6 @@ namespace BallsToCup.Core.Installers
 
         private void BindManagers()
         {
-      
         }
 
         #endregion
