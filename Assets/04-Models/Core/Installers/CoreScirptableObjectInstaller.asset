@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: CoreScirptableObjectInstaller
   m_EditorClassIdentifier: 
   _tubeRotatorModel: {fileID: 11400000, guid: 1d3b0866a1ac0ca4caec698e7ad9c6d2, type: 2}
+  _levelManagerModel: {fileID: 11400000, guid: f1b30e86924459d47910ac856704f334, type: 2}

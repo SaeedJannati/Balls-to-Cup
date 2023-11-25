@@ -1,17 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
-using IInitializable = Unity.VisualScripting.IInitializable;
 
 namespace BallsToCup.Core.Gameplay
 {
-    public class FlowController : IInitializable, IDisposable
+    public class LevelManager : IDisposable, IInitializable
     {
         #region Fields
 
-        [Inject] private FlowControllerEventController _eventController;
+        [Inject] private LevelManagerModel _model;
+        [Inject] private LevelManagerEventController _eventController;
+        [Inject] private FlowControllerEventController _flowEventController;
 
         #endregion
 
@@ -19,22 +17,22 @@ namespace BallsToCup.Core.Gameplay
 
         public void Dispose()
         {
-            UnregisterFromEvents();
             _eventController.Dispose();
             GC.SuppressFinalize(this);
         }
 
         public void Initialize()
         {
-            RegisterToEvents();
         }
 
         private void RegisterToEvents()
         {
+            
         }
 
         private void UnregisterFromEvents()
         {
+            
         }
 
         #endregion

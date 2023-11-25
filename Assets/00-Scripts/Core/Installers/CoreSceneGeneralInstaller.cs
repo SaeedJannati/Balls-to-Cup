@@ -1,4 +1,4 @@
-using UnityEngine;
+using BallsToCup.Core.Gameplay;
 using Zenject;
 
 namespace BallsToCup.Core.Installers
@@ -15,11 +15,14 @@ namespace BallsToCup.Core.Installers
 
         private void BindEventControllers()
         {
-            
+            Container.Bind<FlowControllerEventController>().AsSingle();
+            Container.Bind<LevelManagerEventController>().AsSingle();
         }
 
         private void BindManagers()
         {
+            Container.BindInterfacesAndSelfTo<FlowController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle();
         }
 
         #endregion

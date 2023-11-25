@@ -21,7 +21,7 @@ namespace BallsToCup.Core.Installers
 
         private void BindInstallers()
         {
-           
+           CoreSceneGeneralInstaller.Install(Container);
         }
 
         private void BindInterfaces()

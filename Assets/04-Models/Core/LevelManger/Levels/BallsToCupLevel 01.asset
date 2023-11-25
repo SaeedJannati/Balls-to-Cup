@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971e75c9cc854752a39c1c0aca5cc2b3, type: 3}
+  m_Name: BallsToCupLevel 01
+  m_EditorClassIdentifier: 
+  index: 0
+  <ballsCount>k__BackingField: 20
+  <controllerSensitivity>k__BackingField: 1
+  <ballDiameter>k__BackingField: 0.15
+  <starRatios>k__BackingField:
+  - _index: 0
+    _ballsRatioPercentage: 50
+    <requiredBalls>k__BackingField: 10
+  - _index: 1
+    _ballsRatioPercentage: 75
+    <requiredBalls>k__BackingField: 15
+  - _index: 2
+    _ballsRatioPercentage: 100
+    <requiredBalls>k__BackingField: 20
