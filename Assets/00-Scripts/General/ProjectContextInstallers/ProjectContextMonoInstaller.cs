@@ -1,3 +1,4 @@
+using BallsToCup.General.Popups;
 using UnityEngine;
 using Zenject;
 
@@ -16,6 +17,8 @@ namespace BallsToCup.General
         private void InstallInstallers()
         {
             ProjectContextGeneralInstaller.Install(Container);
+            PopupsInstaller.Install(Container);
+            PopupManagerInstaller.Install(Container);
         }
 
         #endregion

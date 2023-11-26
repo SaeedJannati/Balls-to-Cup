@@ -8,172 +8,148 @@ Preset:
   m_PrefabAsset: {fileID: 0}
   m_Name: SpriteAtlas
   m_TargetType:
-    m_NativeTypeID: 687078895
+    m_NativeTypeID: 1210832254
     m_ManagedTypePPtr: {fileID: 0}
     m_ManagedTypeFallback: 
   m_Properties:
   - target: {fileID: 0}
-    propertyPath: m_EditorData.textureSettings.anisoLevel
+    propertyPath: m_ExternalObjects.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_TextureSettings.anisoLevel
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.textureSettings.compressionQuality
+    propertyPath: m_TextureSettings.compressionQuality
     value: 50
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.textureSettings.maxTextureSize
+    propertyPath: m_TextureSettings.maxTextureSize
     value: 2048
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.textureSettings.textureCompression
+    propertyPath: m_TextureSettings.textureCompression
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.textureSettings.filterMode
+    propertyPath: m_TextureSettings.filterMode
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.textureSettings.generateMipMaps
+    propertyPath: m_TextureSettings.generateMipMaps
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.textureSettings.readable
+    propertyPath: m_TextureSettings.readable
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.textureSettings.crunchedCompression
+    propertyPath: m_TextureSettings.crunchedCompression
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.textureSettings.sRGB
+    propertyPath: m_TextureSettings.sRGB
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.size
+    propertyPath: m_PlatformSettings.Array.size
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_BuildTarget
+    propertyPath: m_PlatformSettings.Array.data[0].m_BuildTarget
     value: DefaultTexturePlatform
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_MaxTextureSize
+    propertyPath: m_PlatformSettings.Array.data[0].m_MaxTextureSize
     value: 2048
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_ResizeAlgorithm
+    propertyPath: m_PlatformSettings.Array.data[0].m_ResizeAlgorithm
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_TextureFormat
+    propertyPath: m_PlatformSettings.Array.data[0].m_TextureFormat
     value: -1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_TextureCompression
+    propertyPath: m_PlatformSettings.Array.data[0].m_TextureCompression
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_CompressionQuality
+    propertyPath: m_PlatformSettings.Array.data[0].m_CompressionQuality
     value: 50
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_CrunchedCompression
+    propertyPath: m_PlatformSettings.Array.data[0].m_CrunchedCompression
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_AllowsAlphaSplitting
+    propertyPath: m_PlatformSettings.Array.data[0].m_AllowsAlphaSplitting
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_Overridden
+    propertyPath: m_PlatformSettings.Array.data[0].m_Overridden
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_IgnorePlatformSupport
+    propertyPath: m_PlatformSettings.Array.data[0].m_IgnorePlatformSupport
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_AndroidETC2FallbackOverride
+    propertyPath: m_PlatformSettings.Array.data[0].m_AndroidETC2FallbackOverride
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.platformSettings.Array.data[0].m_ForceMaximumCompressionQuality_BC6H_BC7
+    propertyPath: m_PlatformSettings.Array.data[0].m_ForceMaximumCompressionQuality_BC6H_BC7
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.packingSettings.padding
+    propertyPath: m_PackingSettings.padding
     value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.packingSettings.blockOffset
+    propertyPath: m_PackingSettings.blockOffset
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.packingSettings.allowAlphaSplitting
+    propertyPath: m_PackingSettings.allowAlphaSplitting
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.packingSettings.enableRotation
+    propertyPath: m_PackingSettings.enableRotation
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.packingSettings.enableTightPacking
+    propertyPath: m_PackingSettings.enableTightPacking
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.packingSettings.enableAlphaDilation
+    propertyPath: m_PackingSettings.enableAlphaDilation
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.secondaryTextureSettings.Array.size
+    propertyPath: m_SecondaryTextureSettings.Array.size
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.variantMultiplier
+    propertyPath: m_VariantMultiplier
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.packables.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_EditorData.bindAsDefault
+    propertyPath: m_BindAsDefault
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.isAtlasV2
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_EditorData.cachedData
+    propertyPath: m_UserData
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_EditorData.packedSpriteRenderDataKeys.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_MasterAtlas
+    propertyPath: m_AssetBundleName
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: m_PackedSprites.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_PackedSpriteNamesToIndex.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_RenderDataMap.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_Tag
-    value: New Sprite Atlas
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_IsVariant
-    value: 0
+    propertyPath: m_AssetBundleVariant
+    value: 
     objectReference: {fileID: 0}
   m_ExcludedProperties: []

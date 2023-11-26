@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315eebd4fa949914b860d74887af6351, type: 3}
   m_Name: ProjectContextScriptableObjectInstaller
   m_EditorClassIdentifier: 
+  _PopupManagerModel: {fileID: 11400000, guid: c05b662280229ff4abc692df2b602965, type: 2}
