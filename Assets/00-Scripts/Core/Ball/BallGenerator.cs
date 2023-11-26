@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BallsToCup.General;
 using NaughtyAttributes;
@@ -53,16 +55,46 @@ namespace BallsToCup.Core.Gameplay
             var currentLevel = _levelManagerEventController.onCurrentLevelRequest.GetFirstResult();
             if (currentLevel == default)
                 return;
-            var pivotPos = _tubeEventController.onPivotTransformRequest.GetFirstResult();
             var ballPrefab = await LoadBallPrefab();
             SetPhysicsMaterialProperties(currentLevel);
             await Task.Yield();
-            for (int i = 0, e = currentLevel.ballsCount; i < e; i++)
-            {
-                CreateBall(pivotPos, currentLevel, ballPrefab);
-            }
+            var pivotPos = _tubeEventController.onPivotTransformRequest.GetFirstResult();
+            StartCoroutine(CreateBallsRoutine(currentLevel, pivotPos, ballPrefab));
 
-            _model.ball.ReleaseAsset();
+        }
+
+         IEnumerator CreateBallsRoutine(BallsToCupLevel currentLevel,Vector3 pivotPos,CoreBallView prefab)
+         {
+             var ballsCount = currentLevel.ballsCount;
+             var counter = 0;
+             var delay = new WaitForSeconds(.6f);
+             var ballsDistance = currentLevel.ballDiameter * 1.03f;
+             var deltaPos = Vector3.zero;
+            while (true)
+            {
+                for (int i = -1; i < 2; i++)
+                {
+                    for (int j = -1; j < 2; j++)
+                    {
+                        for (int k = -1; k < 2; k++)
+                        {
+                            if (counter >= ballsCount)
+                            {
+                                _model.ball.ReleaseAsset();
+                                yield break;
+                            }
+
+                            deltaPos.x = i * ballsDistance;
+                            deltaPos.y = j * ballsDistance;
+                            deltaPos.z = k * ballsDistance;
+                            CreateBall(pivotPos + deltaPos, currentLevel, prefab);
+                            counter++;
+                        }
+                    }
+                }
+
+                yield return delay;
+            }
         }
 
         private void CreateBall(Vector3 pos, BallsToCupLevel currentLevel, CoreBallView prefab)

@@ -20,7 +20,7 @@ MonoBehaviour:
   <ballsBounce>k__BackingField: 0
   <ballMass>k__BackingField: 1
   <gravity>k__BackingField: 9.81
-  <tubeDistanceToGround>k__BackingField: 6.348
+  <tubeDistanceToGround>k__BackingField: 7
   <starRatios>k__BackingField:
   - _index: 0
     _ballsRatioPercentage: 50

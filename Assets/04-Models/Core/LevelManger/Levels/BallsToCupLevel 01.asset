@@ -15,7 +15,7 @@ MonoBehaviour:
   index: 0
   <ballsCount>k__BackingField: 20
   <controllerSensitivity>k__BackingField: 1
-  <ballDiameter>k__BackingField: 0.15
+  <ballDiameter>k__BackingField: 0.3
   <ballsFriction>k__BackingField: 0.6
   <ballsBounce>k__BackingField: 0
   <ballMass>k__BackingField: 1
