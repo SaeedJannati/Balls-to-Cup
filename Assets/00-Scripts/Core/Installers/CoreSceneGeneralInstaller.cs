@@ -26,6 +26,7 @@ namespace BallsToCup.Core.Installers
             Container.BindInterfacesAndSelfTo<FlowControllerEventController>().AsSingle();
             Container.BindInterfacesAndSelfTo<LevelManagerEventController>().AsSingle();
             Container.BindInterfacesAndSelfTo<TubeEventController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameManagerEventController>().AsSingle();
         }
 
         private void BindManagers()
@@ -33,7 +34,7 @@ namespace BallsToCup.Core.Installers
             Container.BindInterfacesAndSelfTo<FlowController>().AsSingle();
             Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle();
             Container.BindInterfacesAndSelfTo<TubeGenerator>().AsSingle();
-            
+            Container.BindInterfacesAndSelfTo<GameManager>().AsSingle();
         }
 
         #endregion

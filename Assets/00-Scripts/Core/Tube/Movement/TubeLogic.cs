@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using BallsToCup.Core;
 using BallsToCup.Core.Gameplay;
-using BallsToCup.General;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +11,8 @@ public class TubeLogic : IDisposable
   [Inject] private TubeEventController _eventController;
   [Inject] private IDraggable _draggable;
   [Inject] private LevelManagerEventController _levelManagerEventController;
+  [Inject] private FlowControllerEventController _flowControllerEventController;
+  [Inject] private GameManagerEventController _gameManagerEventController;
   private readonly TubeView _view;
   private Camera _camera;
   private Vector2 _currentPointerPos;
@@ -21,6 +20,7 @@ public class TubeLogic : IDisposable
   private Vector2 _pivotPointOnScreen;
   private float _moveThreshold;
   private float _rotationSpeed;
+  private bool _inputEnable;
   #endregion
 
   #region Constructor
@@ -68,6 +68,8 @@ public class TubeLogic : IDisposable
   private void RegisterToEvents()
   {
     _eventController.onPivotTransformRequest.Add(OnPivotTransformRequest);
+    _eventController.onBallTriggerEdge.Add(OnBallTriggerEdge);
+    _flowControllerEventController.onEnableInput.Add(OnInputEnable);
     if (_draggable == default)
       return;
     _draggable.onDrag += OnDrag;
@@ -77,11 +79,20 @@ public class TubeLogic : IDisposable
   private void UnregisterFromEvent()
   {
     _eventController.onPivotTransformRequest.Remove(OnPivotTransformRequest);
+    _eventController.onBallTriggerEdge.Remove(OnBallTriggerEdge);
+    _flowControllerEventController.onEnableInput.Remove(OnInputEnable);
     if (_draggable == default)
       return;
     _draggable.onDrag -= OnDrag;
     _draggable.onDragDelta -= OnDragDelta;
   }
+
+  private void OnBallTriggerEdge(bool isGettingOut)
+  {
+    _gameManagerEventController.onBallGotOutOfTube.Trigger(isGettingOut);
+  }
+
+  private void OnInputEnable(bool enable)=> _inputEnable = enable;
 
   private Vector3 OnPivotTransformRequest() => _view.tubePivot.position;
 
@@ -94,11 +105,15 @@ public class TubeLogic : IDisposable
   
   private void OnDrag(Vector2 pointerPos)
   {
+    if(!_inputEnable)
+      return;
     _currentPointerPos = pointerPos;
   }
 
   private void OnDragDelta(Vector2 pointerDeltaPos)
   {
+    if(!_inputEnable)
+      return;
     _deltaPointerPos = pointerDeltaPos;
     CheckForRotation();
   }
