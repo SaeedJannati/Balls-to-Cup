@@ -49,8 +49,9 @@ namespace BallsToCup.Core.Gameplay
             _levelManagerEventController.onLevelGenerationComplete.Remove(OnLevelGenerationComplete);
         }
 
-        private void OnLevelGenerationComplete()
+        private async void OnLevelGenerationComplete()
         {
+            await Task.Delay(2000);
             _eventController.onEnableInput.Trigger(true);
             _eventController.onGameStart.Trigger();
         }

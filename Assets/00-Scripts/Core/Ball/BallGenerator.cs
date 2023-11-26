@@ -56,20 +56,19 @@ namespace BallsToCup.Core.Gameplay
             if (currentLevel == default)
                 return;
             var ballPrefab = await LoadBallPrefab();
-            SetPhysicsMaterialProperties(currentLevel);
+            SetPhysicsProperties(currentLevel);
             await Task.Yield();
             var pivotPos = _tubeEventController.onPivotTransformRequest.GetFirstResult();
             StartCoroutine(CreateBallsRoutine(currentLevel, pivotPos, ballPrefab));
-
         }
 
-         IEnumerator CreateBallsRoutine(BallsToCupLevel currentLevel,Vector3 pivotPos,CoreBallView prefab)
-         {
-             var ballsCount = currentLevel.ballsCount;
-             var counter = 0;
-             var delay = new WaitForSeconds(.6f);
-             var ballsDistance = currentLevel.ballDiameter * 1.03f;
-             var deltaPos = Vector3.zero;
+        IEnumerator CreateBallsRoutine(BallsToCupLevel currentLevel, Vector3 pivotPos, CoreBallView prefab)
+        {
+            var ballsCount = currentLevel.ballsCount;
+            var counter = 0;
+            var delay = new WaitForSeconds(.6f);
+            var ballsDistance = currentLevel.ballDiameter * 1.03f;
+            var deltaPos = Vector3.zero;
             while (true)
             {
                 for (var i = -1; i < 2; i++)
@@ -108,8 +107,9 @@ namespace BallsToCup.Core.Gameplay
             _ballLogicFactory.Create(view);
         }
 
-        private void SetPhysicsMaterialProperties(BallsToCupLevel currentLevel)
+        private void SetPhysicsProperties(BallsToCupLevel currentLevel)
         {
+            Physics.gravity = currentLevel.gravity * Vector3.down;
             _model.ballsPhysiscMaterial.dynamicFriction = currentLevel.ballsFriction;
             _model.ballsPhysiscMaterial.staticFriction = currentLevel.ballsFriction;
             _model.ballsPhysiscMaterial.bounciness = currentLevel.ballsBounce;

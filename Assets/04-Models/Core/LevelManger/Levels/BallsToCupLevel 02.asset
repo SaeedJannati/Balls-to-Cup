@@ -23,12 +23,15 @@ MonoBehaviour:
   <tubeDistanceToGround>k__BackingField: 7
   <starRatios>k__BackingField:
   - _index: 0
+    index: 0
     _ballsRatioPercentage: 50
     <requiredBalls>k__BackingField: 20
   - _index: 1
+    index: 1
     _ballsRatioPercentage: 75
     <requiredBalls>k__BackingField: 30
   - _index: 2
+    index: 2
     _ballsRatioPercentage: 100
     <requiredBalls>k__BackingField: 40
   <tube>k__BackingField:

@@ -10,5 +10,8 @@ namespace BallsToCup.Core.Gameplay
         public ListEvent<bool> onBallTriggerdCupEdge = new();
         public ListEvent<int> onTotalBallsChange = new();
         public ListEvent<int> onBallsInCupChange = new();
+        public ListEvent onGameEnd = new();
+        public ListEvent<int> onGameWon = new();
+        public ListEvent onGameLose = new();
     }
 }
