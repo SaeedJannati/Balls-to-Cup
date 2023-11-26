@@ -14,5 +14,7 @@ namespace BallsToCup.Core.Gameplay
         public ListEvent onCreateTubeRequest = new();
         public ListEvent onTubeCreated = new();
         public ListEvent onGenerateBallsRequest = new();
+        public ListEvent onBallsGenerationComplete = new();
+        public ListEvent onLevelGenerationComplete = new();
     }
 }

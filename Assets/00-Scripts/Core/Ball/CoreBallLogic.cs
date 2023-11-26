@@ -7,11 +7,12 @@ using Zenject;
 
 namespace BallsToCup.Core.Gameplay
 {
-    public class CoreBallLogic : IDisposable,IInitializable,IEventListener
+    public class CoreBallLogic : IDisposable, IEventListener
     {
         #region Fields
 
-        private readonly CoreBallView _view; 
+        [Inject] private GameManagerEventController _gameManagerEventController;
+        private readonly CoreBallView _view;
 
         #endregion
 
@@ -22,8 +23,8 @@ namespace BallsToCup.Core.Gameplay
             _view = view;
         }
 
-
         #endregion
+
         #region Methods
 
         public void Dispose()
@@ -32,31 +33,29 @@ namespace BallsToCup.Core.Gameplay
             GC.SuppressFinalize(this);
         }
 
-        public void Initialize()
+        [Inject]
+        public void Initialise()
         {
             RegisterToEvents();
+            _gameManagerEventController.onBallCreated.Trigger();
         }
+
         public void RegisterToEvents()
         {
-         
         }
 
         public void UnregisterFromEvents()
         {
-
         }
+
         #endregion
 
         #region Factory
 
         public class Factory : PlaceholderFactory<CoreBallView, CoreBallLogic>
         {
-            
         }
 
-
         #endregion
- 
     }
 }
-

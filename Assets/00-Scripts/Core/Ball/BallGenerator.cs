@@ -72,15 +72,16 @@ namespace BallsToCup.Core.Gameplay
              var deltaPos = Vector3.zero;
             while (true)
             {
-                for (int i = -1; i < 2; i++)
+                for (var i = -1; i < 2; i++)
                 {
-                    for (int j = -1; j < 2; j++)
+                    for (var j = -1; j < 2; j++)
                     {
-                        for (int k = -1; k < 2; k++)
+                        for (var k = -1; k < 2; k++)
                         {
                             if (counter >= ballsCount)
                             {
                                 _model.ball.ReleaseAsset();
+                                _levelManagerEventController.onBallsGenerationComplete.Trigger();
                                 yield break;
                             }
 

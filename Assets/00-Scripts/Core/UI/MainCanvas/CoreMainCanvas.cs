@@ -1,31 +1,65 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BallsToCup.Core.Gameplay;
+using BallsToCup.General;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 namespace BallsToCup.Core.UI
 {
-    public class CoreMainCanvas : MonoBehaviour
+    public class CoreMainCanvas : MonoBehaviour,IEventListener
     {
         #region Fields
-
-        [Inject] private LevelManagerEventController _levelManagerEventController;
-
-
+        [Inject] private GameManagerEventController _gameManagerEventController;
+        [SerializeField] private TMP_Text _text_totallBalls;
+        [SerializeField] private TMP_Text _text_ballsInCup;
         #endregion
 
-        #region Methods
+        #region Unity actions
 
-        [Button]
-        void RequestTubeCreate()
+        private void Start()
         {
-            _levelManagerEventController.onCreateTubeRequest.Trigger();
+            RegisterToEvents();
         }
 
+        private void OnDestroy()
+        {
+            UnregisterFromEvents();
+        }
 
         #endregion
+        #region Methods
+
+
+
+        public void RegisterToEvents()
+        {
+            _gameManagerEventController.onTotalBallsChange.Add(OnTotalBallsChange);
+            _gameManagerEventController.onBallsInCupChange.Add(OnBallsInCupChange);
+        }
+
+        public void UnregisterFromEvents()
+        {
+            _gameManagerEventController.onTotalBallsChange.Remove(OnTotalBallsChange);
+            _gameManagerEventController.onBallsInCupChange.Remove(OnBallsInCupChange);
+        }
+
+        private void OnBallsInCupChange(int count)
+        {
+            _text_ballsInCup.text = count.ToString();
+        }
+
+        private void OnTotalBallsChange(int count)
+        {
+            _text_totallBalls.text = count.ToString();
+        }
+
+        #endregion
+
+      
     }
 }
 

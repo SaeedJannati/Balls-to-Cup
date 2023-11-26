@@ -25,7 +25,6 @@ namespace BallsToCup.Core.Gameplay
         public void Initialize()
         {
             RegisterToEvents();
-       
         }
 
         [Inject]
@@ -42,10 +41,18 @@ namespace BallsToCup.Core.Gameplay
 
         private void RegisterToEvents()
         {
+            _levelManagerEventController.onLevelGenerationComplete.Add(OnLevelGenerationComplete);
         }
 
         private void UnregisterFromEvents()
         {
+            _levelManagerEventController.onLevelGenerationComplete.Remove(OnLevelGenerationComplete);
+        }
+
+        private void OnLevelGenerationComplete()
+        {
+            _eventController.onEnableInput.Trigger(true);
+            _eventController.onGameStart.Trigger();
         }
 
         #endregion

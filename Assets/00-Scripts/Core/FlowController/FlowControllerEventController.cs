@@ -7,6 +7,7 @@ namespace BallsToCup.Core.Gameplay
 {
     public class FlowControllerEventController : BaseEventController
     {
-      
+        public readonly ListEvent<bool> onEnableInput = new();
+        public readonly ListEvent onGameStart = new();
     }
 }
