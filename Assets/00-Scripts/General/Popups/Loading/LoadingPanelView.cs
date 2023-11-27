@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BallsToCup.General.Popups;
 using UnityEngine;
-namespace BallsToCup.Meta.Popups
+namespace BallsToCup.General.Popups
 {
     public class LoadingPanelView:MonoBehaviour,IPopupView
     {

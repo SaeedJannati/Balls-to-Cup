@@ -19,3 +19,6 @@ MonoBehaviour:
   - name: MessageBox
     popupName: 1
     path: UI/MessageBoxPanel
+  - name: GameResult
+    popupName: 3
+    path: UI/GameResultPanel

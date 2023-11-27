@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6818217841427144090}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BallsToCup.General.Popups.MessageBoxPanelView,
           Assembly-CSharp
         m_MethodName: OnFirstButtonClick
@@ -413,10 +413,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6818217841427144090}
+      - m_Target: {fileID: 4204548755754391205}
         m_TargetAssemblyTypeName: BallsToCup.General.Popups.MessageBoxPanelView,
           Assembly-CSharp
-        m_MethodName: OnFirstButtonClick
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -759,9 +759,9 @@ GameObject:
   - component: {fileID: 7057621874826504532}
   - component: {fileID: 6217341116363873657}
   - component: {fileID: 6465361412683998100}
-  - component: {fileID: 6818217841427144090}
+  - component: {fileID: 7043253496973287399}
   m_Layer: 5
-  m_Name: MessageBoxPanel
+  m_Name: GameResultPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _criterionAspectRatio: {fileID: 11400000, guid: f2f58bf09df09714b8542ee0a194d69e,
     type: 2}
---- !u!114 &6818217841427144090
+--- !u!114 &7043253496973287399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -874,15 +874,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4204548755754391205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1258dca8e9ee241b092eb92351a166, type: 3}
+  m_Script: {fileID: 11500000, guid: e59b5aa2e17441368fbc5db4a3ead577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button_first: {fileID: 5463658706295823071}
-  _button_second: {fileID: 1130531493733507866}
-  _text_firstButton: {fileID: 7584811948988115407}
-  _text_secondButton: {fileID: 7654395800925545917}
-  _text_title: {fileID: 7904276097535980816}
-  _text_message: {fileID: 4748319097580747677}
   _canvasGroup: {fileID: 2874479712457609897}
 --- !u!1 &4629024764051552433
 GameObject:
