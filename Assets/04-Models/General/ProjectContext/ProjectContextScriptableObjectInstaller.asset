@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: ProjectContextScriptableObjectInstaller
   m_EditorClassIdentifier: 
   _PopupManagerModel: {fileID: 11400000, guid: c05b662280229ff4abc692df2b602965, type: 2}
+  _gameResultPanelModel: {fileID: 11400000, guid: e9002954bc31d9645aca7aa83a6af67d,
+    type: 2}

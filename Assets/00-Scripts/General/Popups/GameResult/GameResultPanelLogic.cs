@@ -11,6 +11,7 @@ namespace BallsToCup.General.Popups
 
         private GameResultPanelView _view;
         [Inject] private GameResultPanelEventController _eventController;
+        [Inject] private GameResultPanelModel _model;
         private bool _isClosing = false;
         #endregion
 
@@ -57,11 +58,29 @@ namespace BallsToCup.General.Popups
         public void RegisterToEvents()
         {
             _eventController.onDispose.Add(OnViewDestroy);
+            _eventController.onHomeClick.Add(OnHomeClick);
+            _eventController.onRetryClick.Add(OnRetryClick);
+            _eventController.onNextLevelClick.Add(OnNextLevelClick);
         }
 
         public void UnregisterFromEvents()
         {
             _eventController.onDispose.Remove(OnViewDestroy);
+            _eventController.onHomeClick.Remove(OnHomeClick);
+            _eventController.onRetryClick.Remove(OnRetryClick);
+            _eventController.onNextLevelClick.Remove(OnNextLevelClick);
+        }
+
+        private void OnNextLevelClick()
+        {
+        }
+
+        private void OnRetryClick()
+        {
+        }
+
+        private void OnHomeClick()
+        {
         }
 
         private void OnViewDestroy()

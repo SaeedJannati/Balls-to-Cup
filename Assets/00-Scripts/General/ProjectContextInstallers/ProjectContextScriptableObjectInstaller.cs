@@ -9,7 +9,7 @@ public class ProjectContextScriptableObjectInstaller : ScriptableObjectInstaller
     #region Fields
 
     [SerializeField, Expandable] private PopupManagerModel _PopupManagerModel;
-    
+    [SerializeField, Expandable] private GameResultPanelModel _gameResultPanelModel;
 
     #endregion
 
@@ -18,6 +18,8 @@ public class ProjectContextScriptableObjectInstaller : ScriptableObjectInstaller
     public override void InstallBindings()
     {
         Container.Bind<PopupManagerModel>().FromScriptableObject(_PopupManagerModel).AsSingle();
+        Container.Bind<GameResultPanelModel>().FromScriptableObject(_gameResultPanelModel).AsSingle();
+        
     }
 
     #endregion
