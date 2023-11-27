@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BallsToCup.General;
 using TMPro;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace BallsToCup.Meta.UI
         public MetaSelectLevelLevelView SetLevel(int level)
         {
             _levelIndex = level;
-            _text_level.text = level.ToString();
+            _text_level.text = (level+1).ToString();
             return this;
         }
 

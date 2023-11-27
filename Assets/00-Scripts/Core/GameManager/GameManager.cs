@@ -61,12 +61,10 @@ namespace BallsToCup.Core.Gameplay
             if (_ballsInTheCup < currentLevel.starRatios[0].requiredBalls)
             {
                 _eventController.onGameLose.Trigger();
-                BtcLogger.Log("YouLost!");
                 return;
             }
 
             var starsCount = currentLevel.starRatios.LastOrDefault(i => i.requiredBalls <= _ballsInTheCup)?.index+1??1;
-            BtcLogger.Log($"YouWon!|stars:{starsCount}");
             _eventController.onGameWon.Trigger(starsCount);
         }
 

@@ -1,18 +1,22 @@
 ﻿using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
 namespace BallsToCup.General.Popups
 {
-    public class GameResultPanelLogic: IPopupLogic, IEventListener, IDisposable
+    public class GameResultPanelLogic : IPopupLogic, IEventListener, IDisposable
     {
         #region Fields
 
         private GameResultPanelView _view;
         [Inject] private GameResultPanelEventController _eventController;
         [Inject] private GameResultPanelModel _model;
+        [Inject] private PlayerProgressManager _progressManager;
+        [Inject] private SceneLoader _sceneLoader;
         private bool _isClosing = false;
+
         #endregion
 
         #region Constructors
@@ -21,6 +25,7 @@ namespace BallsToCup.General.Popups
         {
             SetView(view);
         }
+
         #endregion
 
         #region Methods
@@ -51,7 +56,6 @@ namespace BallsToCup.General.Popups
 
         public void Close()
         {
-          
             GameObject.Destroy(_view.gameObject);
         }
 
@@ -73,14 +77,19 @@ namespace BallsToCup.General.Popups
 
         private void OnNextLevelClick()
         {
+            var nextLevel = _progressManager.GetSelectedLevel();
+            _progressManager.OnSelectLevel(nextLevel + 1);
+            _sceneLoader.LoadScene(2, () => { _sceneLoader.LoadScene(1); });
         }
 
         private void OnRetryClick()
         {
+            _sceneLoader.LoadScene(2, () => { _sceneLoader.LoadScene(1); });
         }
 
         private void OnHomeClick()
         {
+            _sceneLoader.LoadScene(2, () => { _sceneLoader.LoadScene(0); });
         }
 
         private void OnViewDestroy()
@@ -89,17 +98,15 @@ namespace BallsToCup.General.Popups
             Dispose();
         }
 
-
-
         private void OnClose()
         {
             if (_isClosing)
                 return;
             ((IPopupLogic)this).OnExit(_view.canvasGroup, onComplete: Close);
         }
+
         private void Dispose(bool disposing)
         {
-          
             if (disposing)
             {
                 _eventController?.Dispose();
@@ -111,18 +118,49 @@ namespace BallsToCup.General.Popups
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        #endregion
 
-        #region Factory
-
-        public class Factory : PlaceholderFactory<IPopupView,GameResultPanelLogic>
+        public GameResultPanelLogic SetTitle(string title)
         {
-            
+            _view.SetTitle(title);
+            return this;
+        }
+
+        public GameResultPanelLogic SetMessage(string message)
+        {
+            _view.SetMessage(message);
+            return this;
+        }
+
+        public GameResultPanelLogic SetStars(int stars)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (i < stars)
+                {
+                    _view.starsForegrounds[i].gameObject.SetActive(true);
+                    continue;
+                }
+
+                _view.starsForegrounds[i].gameObject.SetActive(false);
+            }
+
+            return this;
+        }
+
+        public GameResultPanelLogic SetNextLevelActive(bool enable)
+        {
+            _view.SetNextButtonEnable(enable);
+            return this;
         }
 
         #endregion
 
+        #region Factory
 
-      
+        public class Factory : PlaceholderFactory<IPopupView, GameResultPanelLogic>
+        {
+        }
+
+        #endregion
     }
 }

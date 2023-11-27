@@ -10,10 +10,15 @@ namespace BallsToCup.General
 
         [Inject] private PlayerProgressManagerModel _model;
         [Inject] private PrefHandler _prefHandler;
-        
-
         #endregion
+        
         #region Methods
+
+        public bool IsSelectedLevelLast()
+        {
+            LoadPlayerProgress();
+            return _model.playerProgressData.selectedLevel == _model.playerProgressData.levelsProgress.Count - 1;
+        }
 
         public void LoadPlayerProgress()
         {

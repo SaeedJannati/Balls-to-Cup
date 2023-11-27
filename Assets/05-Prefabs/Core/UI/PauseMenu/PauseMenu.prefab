@@ -460,6 +460,7 @@ MonoBehaviour:
   _model: {fileID: 11400000, guid: 1d3ead4b710ad0c4f9693e8ff7fa7643, type: 2}
   _button_audio: {fileID: 3193710658795305232}
   _button_music: {fileID: 4022263568993805495}
+  _canvasGroup: {fileID: 5877372941533880975}
 --- !u!1 &2276004196597503247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,7 +2179,7 @@ MonoBehaviour:
   m_text: Pause
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9be6a787dbd3bb14b890d557e5a5c370, type: 2}
-  m_sharedMaterial: {fileID: 3087217642205654310, guid: 9be6a787dbd3bb14b890d557e5a5c370,
+  m_sharedMaterial: {fileID: 5666226679968993944, guid: 9be6a787dbd3bb14b890d557e5a5c370,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
