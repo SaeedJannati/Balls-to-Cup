@@ -82,7 +82,6 @@ namespace BallsToCup.Core.Gameplay
 
         private async void OnLevelGenerationComplete()
         {
-            await Task.Delay(2000);
             _eventController.onEnableInput.Trigger(true);
             _eventController.onGameStart.Trigger();
         }

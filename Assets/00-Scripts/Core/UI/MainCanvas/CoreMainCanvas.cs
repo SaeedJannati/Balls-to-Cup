@@ -63,6 +63,11 @@ namespace BallsToCup.Core.UI
             _pauseMenu.BringUp();
         }
 
+        public void OnFinishClick()
+        {
+            _gameManagerEventController.onGameEnd.Trigger();
+        }
+
         #endregion
 
       

@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using BallsToCup.General;
+using BallsToCup.General.Popups;
 using Zenject;
 
 namespace BallsToCup.Core.Gameplay
@@ -14,6 +16,7 @@ namespace BallsToCup.Core.Gameplay
         [Inject] private LevelManagerEventController _eventController;
         [Inject] private FlowControllerEventController _flowEventController;
         [Inject] private PrefHandler _prefHandler;
+        [Inject] private PopupManager _popupManager;
         private int _currentLevelIndex;
         private BallsToCupLevel _currentLevel;
         #endregion
@@ -59,14 +62,17 @@ namespace BallsToCup.Core.Gameplay
             _eventController.onBallsGenerationComplete.Remove(OnBallsGenerationComplete);
         }
 
-        private void OnBallsGenerationComplete()
+        private async void OnBallsGenerationComplete()
         {
             _eventController.onLevelGenerationComplete.Trigger();
+            await Task.Delay(1000);
+            _popupManager.HideLoading();
         }
 
         private void OnTubeCreated()
         {
             _eventController.onGenerateBallsRequest.Trigger();
+            _popupManager.ShowLoading();
         }
 
         private BallsToCupLevel OnCurrentLevelRequest() => _currentLevel;
