@@ -9,6 +9,7 @@ namespace BallsToCup.Core.Gameplay
     {
         #region Fields
 
+        [Inject] private PlayerProgressManager _progressManager;
         [Inject] private LevelManagerModel _model;
         [Inject] private LevelManagerEventController _eventController;
         [Inject] private FlowControllerEventController _flowEventController;
@@ -34,7 +35,7 @@ namespace BallsToCup.Core.Gameplay
 
         private void ChooseLevel()
         {
-            _currentLevelIndex = _prefHandler.GetPref(PrefKeys.LevelKeys.playerLevelKey, 2);
+            _currentLevelIndex = _progressManager.GetSelectedLevel();
             _currentLevel = _model.levels.FirstOrDefault(i => i.index == _currentLevelIndex);
             if (_currentLevel == default)
                 throw new Exception($"No such level with index {_currentLevelIndex} exists!");

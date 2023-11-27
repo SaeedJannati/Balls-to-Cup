@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Zenject;
 
 namespace BallsToCup.General
@@ -75,6 +76,18 @@ namespace BallsToCup.General
             SavePlayerProgress();
 
 
+        }
+
+        public int GetSelectedLevel()
+        {
+            LoadPlayerProgress();
+            return _model.playerProgressData.selectedLevel;
+        }
+
+        public List<PlayerProgressManagerModel.LevelProgress> GetLevelsProgress()
+        {
+            LoadPlayerProgress();
+            return _model.playerProgressData.levelsProgress;
         }
 
         public void Dispose()

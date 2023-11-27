@@ -12,7 +12,7 @@ namespace BallsToCup.General
         #region Fields
 
         [field: SerializeField] public LevelManagerModel _levelManagerModel;
-        public PlayerProgressData playerProgressData;
+        public PlayerProgressData playerProgressData=new();
 
         #endregion
 
@@ -79,7 +79,7 @@ namespace BallsToCup.General
         public class PlayerProgressData
         {
             public int selectedLevel;
-            public List<LevelProgress> levelsProgress;
+            public List<LevelProgress> levelsProgress=new();
         }
 
         [Serializable]
@@ -88,6 +88,7 @@ namespace BallsToCup.General
             public int index;
             public bool hasReached;
             public int starsCount;
+            [JsonIgnore] public bool passed => starsCount > 0;
         }
 
         #endregion
