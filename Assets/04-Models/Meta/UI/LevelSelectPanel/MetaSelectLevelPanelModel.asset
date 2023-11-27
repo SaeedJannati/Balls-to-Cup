@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MetaSelectLevelPanelModel
   m_EditorClassIdentifier: 
   <fadePeriod>k__BackingField: 0.5
-  <levelItemScalePeriod>k__BackingField: 0.2
-  <levelItemGenerationDelayInBetween>k__BackingField: 0.08
+  <levelItemScalePeriod>k__BackingField: 0.6
+  <levelItemGenerationDelayInBetween>k__BackingField: 0.3
   <levelViewReference>k__BackingField:
     m_AssetGUID: 43e31dfa8b3149b4ab4339781b07c3df
     m_SubObjectName: 

@@ -21,10 +21,25 @@ namespace BallsToCup.Meta.UI
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Transform _levelsViewsParent;
         private bool _isClosing;
-        private List<MetaSelectLevelLevelView> _leveViews = new();
+        private List<MetaSelectLevelLevelView> _levelsViews = new();
         #endregion
 
+        #region Unity actions
+
+        private void OnDisable()
+        {
+            ClearLevelViews();
+        }
+
+        #endregion
         #region Methods
+
+        void ClearLevelViews()
+        {
+            _levelsViewsParent.ClearChildren();
+            _levelsViews = new();
+        }
+        
 
         public void BringUp()
         {
@@ -63,8 +78,7 @@ namespace BallsToCup.Meta.UI
 
         private async void PopulateLevels()
         {
-            _levelsViewsParent.ClearChildren();
-            _leveViews = new();
+            ClearLevelViews();
             var levelViewReference = await _addressable.LoadAssetReference(_model.levelViewReference);
             if(!levelViewReference.TryGetComponent(out MetaSelectLevelLevelView levelView))
                 return;
@@ -79,14 +93,14 @@ namespace BallsToCup.Meta.UI
                     .SetStarsGroupActive(levelsData[i].hasReached)
                     .SetPlayButtonActive(levelsData[i].hasReached)
                     .SetStarCount(levelsData[i].starsCount);
+                view._backTransform.localScale=Vector3.zero;
+                _levelsViews.Add(view);
                 if (i == currentLevel)
                 {
                     view.SetAsCurrentLevel(true);
                     continue;
                 }
                 view.SetAsCurrentLevel(false);
-                view._backTransform.localScale=Vector3.zero;
-                _leveViews.Add(view);
             }
 
             StartCoroutine(ShowLevelsWithEffect());
@@ -96,9 +110,10 @@ namespace BallsToCup.Meta.UI
         IEnumerator ShowLevelsWithEffect()
         {
             var delay = new WaitForSeconds(_model.levelItemGenerationDelayInBetween);
-            for (int i = 0,e=_leveViews.Count; i < e; i++)
+            yield return delay;
+            for (int i = 0,e=_levelsViews.Count; i < e; i++)
             {
-                _leveViews[i]._backTransform.DOScale(1.0f, _model.levelItemScalePeriod).SetEase(Ease.OutBounce);
+                _levelsViews[i]._backTransform.DOScale(1.0f, _model.levelItemScalePeriod).SetEase(Ease.OutBounce);
                 yield return delay;
             }
         }
