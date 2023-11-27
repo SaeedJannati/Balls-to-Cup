@@ -91,7 +91,7 @@ namespace BallsToCup.General.Popups
 
 
 
-        private void OnCloseClicked()
+        private void OnClose()
         {
             if (_isClosing)
                 return;
