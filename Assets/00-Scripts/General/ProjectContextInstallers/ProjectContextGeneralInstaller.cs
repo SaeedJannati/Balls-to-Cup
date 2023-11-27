@@ -20,7 +20,7 @@ namespace BallsToCup.General
             Container.BindInterfacesAndSelfTo<PrefHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<AddressableLoader>().AsSingle();
             Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();
-            
+            Container.BindInterfacesAndSelfTo<PlayerProgressManager>().AsSingle();
         }
     }
 }

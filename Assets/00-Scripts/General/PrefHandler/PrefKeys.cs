@@ -11,4 +11,11 @@ namespace BallsToCup.General
             public const string playerLevelKey = "player_level";
         }
     }
+    public static partial class PrefKeys
+    {
+        public static class PlayerProgressKeys
+        {
+            public const string playerProgressKey = "player_progress";
+        }
+    }
 }
