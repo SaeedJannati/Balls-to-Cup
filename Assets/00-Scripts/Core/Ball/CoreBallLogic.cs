@@ -9,7 +9,9 @@ namespace BallsToCup.Core.Gameplay
         #region Fields
 
         [Inject] private GameManagerEventController _gameManagerEventController;
+        [Inject] private YCriterion _yCriterion;
         private readonly CoreBallView _view;
+
         #endregion
 
         #region Constructors
@@ -21,7 +23,7 @@ namespace BallsToCup.Core.Gameplay
 
         #endregion
 
-   
+
         #region Methods
 
         public void Dispose()
@@ -35,6 +37,9 @@ namespace BallsToCup.Core.Gameplay
         {
             RegisterToEvents();
             _gameManagerEventController.onBallCreated.Trigger();
+            _view
+                .SetGoBelowYCriterionAction(OnGoBelowYCriterion)
+                .SetYCriterion(_yCriterion.GetYCriterion);
         }
 
         public void RegisterToEvents()
@@ -43,6 +48,11 @@ namespace BallsToCup.Core.Gameplay
 
         public void UnregisterFromEvents()
         {
+        }
+
+        void OnGoBelowYCriterion()
+        {
+            _gameManagerEventController.onBallGoBelowYCriterion.Trigger();
         }
 
         #endregion

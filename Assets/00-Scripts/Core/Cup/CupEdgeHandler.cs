@@ -28,7 +28,7 @@ namespace BallsToCup.Core.Gameplay
             if(!other.gameObject.TryGetComponent(out CoreBallView view))
                 return;
             var isAdding = Vector3.Dot(view.ballRigidBody.velocity, Vector3.up) < 0 ;
-            _gameManagerEventController.onBallTriggerdCupEdge.Trigger(isAdding);
+            _gameManagerEventController.onBallTriggerCupEdge.Trigger(isAdding);
         }
 
         #endregion

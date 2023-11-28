@@ -72,7 +72,6 @@ public class TubeLogic : IDisposable
   private void RegisterToEvents()
   {
     _eventController.onPivotTransformRequest.Add(OnPivotTransformRequest);
-    _eventController.onBallTriggerEdge.Add(OnBallTriggerEdge);
     _flowControllerEventController.onEnableInput.Add(OnInputEnable);
     if (_draggable == default)
       return;
@@ -84,7 +83,6 @@ public class TubeLogic : IDisposable
   private void UnregisterFromEvent()
   {
     _eventController.onPivotTransformRequest.Remove(OnPivotTransformRequest);
-    _eventController.onBallTriggerEdge.Remove(OnBallTriggerEdge);
     _flowControllerEventController.onEnableInput.Remove(OnInputEnable);
     if (_draggable == default)
       return;
@@ -92,10 +90,6 @@ public class TubeLogic : IDisposable
     _draggable.onDragDelta -= OnDragDelta;
   }
 
-  private void OnBallTriggerEdge(bool isGettingOut)
-  {
-    _gameManagerEventController.onBallGotOutOfTube.Trigger(isGettingOut);
-  }
 
   private void OnInputEnable(bool enable)
   {
