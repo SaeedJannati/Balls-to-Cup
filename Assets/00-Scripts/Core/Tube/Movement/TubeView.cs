@@ -17,7 +17,6 @@ namespace BallsToCup.Core
         #region Fields
 
         [field: SerializeField] public Transform tubePivot { get; private set; }
-        [SerializeField] private TubeEdgeHandler _edgeHandler;
         private TubeEventController _eventController;
         private float _deltaAngle;
         [SerializeField] private Rigidbody _rigidbody;
@@ -74,18 +73,15 @@ namespace BallsToCup.Core
 
         public void RegisterToEvents()
         {
-            _edgeHandler.onBallTrigger.Add(OnBallTrigger);
+      
         }
 
         public void UnregisterFromEvents()
         {
-            _edgeHandler.onBallTrigger.Remove(OnBallTrigger);
+            
         }
 
-        private void OnBallTrigger(bool isGettingOut)
-        {
-            _eventController.onBallTriggerEdge.Trigger(isGettingOut);
-        }
+ 
 
         #endregion
     }
