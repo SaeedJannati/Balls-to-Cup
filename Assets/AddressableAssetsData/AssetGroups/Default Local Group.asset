@@ -27,6 +27,46 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1aba70e931614946b6ec30ed291caac
+    m_Address: Assets/12-Audios/Audios/CoreMainTheme.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 315a87b72e64f9846932256c0d58093b
+    m_Address: Assets/12-Audios/Audios/Click.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba5b37a0a141cd840a7a03bf2b1db220
+    m_Address: Assets/12-Audios/Audios/MataMainTheme.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7e53cfea89a95f409f3cecfca414be4
+    m_Address: Assets/12-Audios/Audios/092_Pause_04.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0381d7185ca5d094b80839b1888f192e
+    m_Address: Assets/12-Audios/Audios/DM-CGS-45.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 900e0555ab6dc2c42ac606abb4c5544b
+    m_Address: Assets/12-Audios/Audios/Win.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25b6a4e21ba25ee4693a0f5005cf80ce
+    m_Address: Assets/12-Audios/Audios/Lose.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6a15e372ec214d4c8c951f9427eb639
+    m_Address: Assets/12-Audios/Audios/BallDropToCup.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9346bd039b6edef4abf9c790adb02889, type: 2}
   m_SchemaSet:
