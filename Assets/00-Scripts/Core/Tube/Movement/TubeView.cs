@@ -17,15 +17,19 @@ namespace BallsToCup.Core
         #region Fields
 
         [field: SerializeField] public Transform tubePivot { get; private set; }
+        private Rigidbody _rigidbody;
+        [SerializeField] private MeshRenderer _meshRenderer;
         private TubeEventController _eventController;
         private float _deltaAngle;
-        [SerializeField] private Rigidbody _rigidbody;
         private float _maxRotVelocity;
 
         #endregion
 
         #region Unity actions
-
+        private void Awake()
+        {
+            TryGetComponent(out _rigidbody);
+        }
         private void Start()
         {
             RegisterToEvents();
@@ -39,10 +43,14 @@ namespace BallsToCup.Core
         private void FixedUpdate()
         {
             var deltaTime = Time.fixedDeltaTime;
-            if (_deltaAngle / deltaTime > _maxRotVelocity)
+            var velocity = _deltaAngle / deltaTime;
+            
+            if (velocity*velocity > _maxRotVelocity*_maxRotVelocity)
             {
-                _deltaAngle = _maxRotVelocity * deltaTime;
+                var sign = velocity > 0 ? 1 : -1;
+                _deltaAngle = _maxRotVelocity * deltaTime*sign;
             }
+
             var deltaRot =
                 Quaternion.Euler(_deltaAngle * Vector3.forward);
             var destRot = _rigidbody.rotation * deltaRot;
@@ -73,15 +81,18 @@ namespace BallsToCup.Core
 
         public void RegisterToEvents()
         {
-      
+            _eventController.onTubeBoundsRequest.Add(OnTubeBoundsRequest);
         }
 
         public void UnregisterFromEvents()
         {
-            
+            _eventController.onTubeBoundsRequest.Remove(OnTubeBoundsRequest);
         }
 
- 
+        private (Vector3 min, Vector3 max) OnTubeBoundsRequest()
+        {
+            return (_meshRenderer.bounds.min, _meshRenderer.bounds.max);
+        }
 
         #endregion
     }

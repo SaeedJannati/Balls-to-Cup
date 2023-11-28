@@ -16,5 +16,7 @@ namespace BallsToCup.Core.Gameplay
         public ListEvent onGenerateBallsRequest = new();
         public ListEvent onBallsGenerationComplete = new();
         public ListEvent onLevelGenerationComplete = new();
+        public ListEvent onCameraReady = new();
+        
     }
 }

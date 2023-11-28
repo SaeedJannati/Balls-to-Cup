@@ -22,14 +22,14 @@ namespace BallsToCup.General.Popups
 //default enter and exit animations override them for different popups if you want different animations such as scale or etc.
         public async void OnEnter(CanvasGroup canvasGroup, float period = .3f, Action onComplete = default)
         {
-            // await Fade(canvasGroup, true, period);
+            await Fade(canvasGroup, true, period);
             canvasGroup.alpha = 1.0f;
             onComplete?.Invoke();
         }
 
         public async void OnExit(CanvasGroup canvasGroup, float period = .3f, Action onComplete = default)
         {
-            // await Fade(canvasGroup, false, period);
+            await Fade(canvasGroup, false, period);
             canvasGroup.alpha = 0.0f;
             onComplete?.Invoke();
         }

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <tubePivot>k__BackingField: {fileID: 7947688983116009465}
-  _rigidbody: {fileID: 6063599304001675340}
+  _meshRenderer: {fileID: 8659396940497772978}
 --- !u!54 &6063599304001675340
 Rigidbody:
   m_ObjectHideFlags: 0
