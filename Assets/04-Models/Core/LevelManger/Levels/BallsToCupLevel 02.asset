@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   <ballsCount>k__BackingField: 40
-  <controllerSensitivity>k__BackingField: 1
+  <maxControllerSensitivity>k__BackingField: 2
   <ballDiameter>k__BackingField: 0.15
   <ballsFriction>k__BackingField: 0.6
   <ballsBounce>k__BackingField: 0
   <ballMass>k__BackingField: 1
   <gravity>k__BackingField: 9.81
-  <endGameDelay>k__BackingField: 3
+  <endGameDelay>k__BackingField: 1
   <tubeDistanceToGround>k__BackingField: 7
   <starRatios>k__BackingField:
   - _index: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     _ballsRatioPercentage: 100
     <requiredBalls>k__BackingField: 40
   <tube>k__BackingField:
-    m_AssetGUID: dc83baf69181e6a40890a64a11523c42
+    m_AssetGUID: f203913a9c829714c89acc0cb1957286
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

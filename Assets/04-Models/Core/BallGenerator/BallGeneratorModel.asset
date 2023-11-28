@@ -26,3 +26,5 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f6d26af772ea9c44693d002093b4a901, type: 2}
   - {fileID: 2100000, guid: afcf3612b76ef884ab604a3c353aeef7, type: 2}
   - {fileID: 2100000, guid: 463e85f2fdf2c7f44adf75b0b447f66a, type: 2}
+  <maxBallVelocity>k__BackingField: 5
+  <maxTubeRotVelocity>k__BackingField: 400

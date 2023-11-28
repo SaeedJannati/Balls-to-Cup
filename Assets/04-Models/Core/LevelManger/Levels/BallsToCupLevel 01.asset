@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   <ballsCount>k__BackingField: 20
-  <controllerSensitivity>k__BackingField: 1
+  <maxControllerSensitivity>k__BackingField: 3
   <ballDiameter>k__BackingField: 0.3
-  <ballsFriction>k__BackingField: 0.6
+  <ballsFriction>k__BackingField: 0
   <ballsBounce>k__BackingField: 0
   <ballMass>k__BackingField: 1
   <gravity>k__BackingField: 9.81
-  <endGameDelay>k__BackingField: 3
+  <endGameDelay>k__BackingField: 1
   <tubeDistanceToGround>k__BackingField: 6.348
   <starRatios>k__BackingField:
   - _index: 0

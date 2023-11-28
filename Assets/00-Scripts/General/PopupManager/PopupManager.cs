@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using BallsToCup.Meta.Popups;
 using UnityEngine;
 using Zenject;
 
@@ -24,7 +23,7 @@ namespace BallsToCup.General.Popups
 
         [Inject] private LoadingPanelLogic.Factory _loadingPanelFactory;
         [Inject] private MessageBoxPanelLogic.Factory _messageBoxFactory;
-
+        [Inject] private GameResultPanelLogic.Factory _gameResultFactory;
         #endregion
         #endregion
 
@@ -119,6 +118,7 @@ namespace BallsToCup.General.Popups
             {
                 PopupName.Loading => _loadingPanelFactory.Create(view),
                 PopupName.MessageBox=>_messageBoxFactory.Create(view),
+                PopupName.GameResult=>_gameResultFactory.Create(view),
                 _ => throw new Exception(
                     $"Use specific method for creating this type of popup,Type:{popupName.ToString()}"),
             };

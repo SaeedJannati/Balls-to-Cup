@@ -38,8 +38,8 @@ namespace BallsToCup.Core.Gameplay
         public void RegisterToEvents()
         {
             _eventController.onBallCreated.Add(OnBallCreated);
-            _eventController.onBallGotOutOfTube.Add(OnBallGotOutOfTube);
-            _eventController.onBallTriggerdCupEdge.Add(OnBallTriggeredCupEdge);
+            _eventController.onBallGoBelowYCriterion.Add(OnBallGoBelowYCriterion);
+            _eventController.onBallTriggerCupEdge.Add(OnBallTriggeredCupEdge);
             _flowControllerEventController.onGameStart.Add(OnGameStart);
             _eventController.onGameEnd.Add(OnGameEnd);
         }
@@ -47,8 +47,8 @@ namespace BallsToCup.Core.Gameplay
         public void UnregisterFromEvents()
         {
             _eventController.onBallCreated.Remove(OnBallCreated);
-            _eventController.onBallGotOutOfTube.Remove(OnBallGotOutOfTube);
-            _eventController.onBallTriggerdCupEdge.Remove(OnBallTriggeredCupEdge);
+            _eventController.onBallGoBelowYCriterion.Remove(OnBallGoBelowYCriterion);
+            _eventController.onBallTriggerCupEdge.Remove(OnBallTriggeredCupEdge);
             _flowControllerEventController.onGameStart.Remove(OnGameStart);
             _eventController.onGameEnd.Remove(OnGameEnd);
         }
@@ -61,12 +61,10 @@ namespace BallsToCup.Core.Gameplay
             if (_ballsInTheCup < currentLevel.starRatios[0].requiredBalls)
             {
                 _eventController.onGameLose.Trigger();
-                BtcLogger.Log("YouLost!");
                 return;
             }
 
             var starsCount = currentLevel.starRatios.LastOrDefault(i => i.requiredBalls <= _ballsInTheCup)?.index+1??1;
-            BtcLogger.Log($"YouWon!|stars:{starsCount}");
             _eventController.onGameWon.Trigger(starsCount);
         }
 
@@ -86,12 +84,11 @@ namespace BallsToCup.Core.Gameplay
             _eventController.onBallsInCupChange.Trigger(_ballsInTheCup);
         }
 
-        private void OnBallGotOutOfTube(bool isGettingIn)
+        private void OnBallGoBelowYCriterion()
         {
             if (!_gameStarted)
                 return;
-            var delta = isGettingIn ? 1 : -1;
-            _ballsOutOfTube += delta;
+            _ballsOutOfTube ++ ;
             CheckForGameEnd();
         }
 

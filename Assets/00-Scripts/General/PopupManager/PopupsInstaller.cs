@@ -1,5 +1,4 @@
 using BallsToCup.General.Popups;
-using BallsToCup.Meta.Popups;
 using UnityEngine;
 using Zenject;
 
@@ -17,12 +16,15 @@ public class PopupsInstaller : Installer<PopupsInstaller>
    {
       Container.BindInterfacesAndSelfTo<LoadingPanelEventController>().AsTransient();
       Container.BindInterfacesAndSelfTo<MessageBoxPanelEventController>().AsTransient();
+      Container.BindInterfacesAndSelfTo<GameResultPanelEventController>().AsTransient();
    }
 
    private void BindFactories()
    {
       Container.BindFactory<IPopupView, LoadingPanelLogic, LoadingPanelLogic.Factory>();
       Container.BindFactory<IPopupView, MessageBoxPanelLogic, MessageBoxPanelLogic.Factory>();
+      Container.BindFactory<IPopupView, GameResultPanelLogic, GameResultPanelLogic.Factory>();
+      
    }
 
    #endregion

@@ -6,7 +6,7 @@ using BallsToCup.General.Popups;
 using UnityEngine;
 using Zenject;
 
-namespace BallsToCup.Meta.Popups
+namespace BallsToCup.General.Popups
 {
     public class LoadingPanelLogic : IPopupLogic, IEventListener,IDisposable
     {

@@ -16,6 +16,7 @@ namespace BallsToCup.Core.UI
         [Inject] private GameManagerEventController _gameManagerEventController;
         [SerializeField] private TMP_Text _text_totallBalls;
         [SerializeField] private TMP_Text _text_ballsInCup;
+        [SerializeField] private CorePauseMenu _pauseMenu;
         #endregion
 
         #region Unity actions
@@ -55,6 +56,16 @@ namespace BallsToCup.Core.UI
         private void OnTotalBallsChange(int count)
         {
             _text_totallBalls.text = count.ToString();
+        }
+
+        public void OnPauseMenuClick()
+        {
+            _pauseMenu.BringUp();
+        }
+
+        public void OnFinishClick()
+        {
+            _gameManagerEventController.onGameEnd.Trigger();
         }
 
         #endregion

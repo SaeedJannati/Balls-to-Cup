@@ -1,6 +1,6 @@
 ﻿using BallsToCup.General;
 
-namespace BallsToCup.Meta.Popups
+namespace BallsToCup.General.Popups
 {
     public class LoadingPanelEventController:BaseEventController
     {

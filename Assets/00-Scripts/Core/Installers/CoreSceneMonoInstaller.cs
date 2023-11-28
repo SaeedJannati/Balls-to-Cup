@@ -10,7 +10,7 @@ namespace BallsToCup.Core.Installers
 
         [SerializeField] private SwipeInput _swipeInput;
         [SerializeField] private BallGenerator _ballGenerator;
-
+        [SerializeField] private YCriterion _yCriterion;
         #endregion
 
         #region Methods
@@ -29,6 +29,7 @@ namespace BallsToCup.Core.Installers
         {
             Container.Bind<IDraggable>().FromInstance(_swipeInput).AsSingle();
             Container.Bind<BallGenerator>().FromInstance(_ballGenerator).AsSingle();
+            Container.Bind<YCriterion>().FromInstance(_yCriterion).AsSingle();
         }
 
         #endregion

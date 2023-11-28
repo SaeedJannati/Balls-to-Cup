@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb19a078717946a2baba1747e6901003, type: 3}
+  m_Name: CorePauseMenuModel
+  m_EditorClassIdentifier: 
+  <colourInfos>k__BackingField:
+  - <enable>k__BackingField: 1
+    <colour>k__BackingField: {r: 0.9568628, g: 0.89019614, b: 0.87843144, a: 1}
+  - <enable>k__BackingField: 0
+    <colour>k__BackingField: {r: 0.227451, g: 0.19607845, b: 0.227451, a: 0.64705884}
