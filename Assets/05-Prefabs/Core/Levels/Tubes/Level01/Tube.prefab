@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <tubePivot>k__BackingField: {fileID: 5275330260367218367}
-  _rigidbody: {fileID: 4325075812080251160}
+  _meshRenderer: {fileID: 3512791135253422189}
 --- !u!54 &4325075812080251160
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -191,3 +191,9 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -9157931534672655014, guid: fa89f4494f86f1046bd3f1281f0028f7, type: 3}
+--- !u!23 &3512791135253422189 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: fa89f4494f86f1046bd3f1281f0028f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2845823395265346793}
+  m_PrefabAsset: {fileID: 0}

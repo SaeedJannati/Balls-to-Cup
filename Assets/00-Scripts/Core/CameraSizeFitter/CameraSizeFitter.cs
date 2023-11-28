@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using BallsToCup.Core;
 using BallsToCup.Core.Gameplay;
 using BallsToCup.General;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace MyNamespace
@@ -17,7 +19,9 @@ namespace MyNamespace
         private Camera _camera;
         private Transform _tubeTransform;
         private MeshRenderer _tubeRender;
-        [SerializeField] private MeshRenderer _cupRenderer;
+        [SerializeField] private MeshRenderer _groundRenderer;
+        [SerializeField] private RectTransform _bottomBarBorder;
+        [SerializeField] private Canvas _mainCanvas;
         [Inject] private TubeEventController _tubeEventController;
         [Inject] private LevelManagerEventController _levelManagerEventController;
         private Vector3 _tubeMin;
@@ -35,25 +39,18 @@ namespace MyNamespace
         private void Start()
         {
             RegisterToEvents();
+          
+ 
         }
+
+     
 
         private void OnDestroy()
         {
             UnregisterFromEvents();
         }
 
-        private void OnDrawGizmos()
-        {
-            if(!Application.isPlaying)
-                return;
-            var pos = Vector3.zero;
-            Gizmos.color=Color.red;
-            pos.y = GetTopScreenY();
-            Gizmos.DrawWireSphere(pos,1.0f);
-            Gizmos.color=Color.cyan;
-            pos.y = GetBottomScreenY();
-            Gizmos.DrawWireSphere(pos,1.0f);
-        }
+
 
         #endregion
 
@@ -71,28 +68,64 @@ namespace MyNamespace
 
         private async void OnTubeCreated()
         {
-            // await Task.Yield();
-            // var boundsInfo = _tubeEventController.onTubeBoundsRequest.GetFirstResult();
-            // if(boundsInfo==default)
-            //     return;
-            // _tubeMax = boundsInfo.max;
-            // _tubeMin = boundsInfo.min;
-            // SetCameraSizeBaseOnCupAndTube();
+            await Task.Yield();
+            var boundsInfo = _tubeEventController.onTubeBoundsRequest.GetFirstResult();
+            if (boundsInfo == default)
+                return;
+            _tubeMax = boundsInfo.max;
+            _tubeMin = boundsInfo.min;
+            SetCameraSizeBaseOnCupAndTube();
         }
 
-        private void SetCameraSizeBaseOnCupAndTube()
+        private async void SetCameraSizeBaseOnCupAndTube()
         {
-       
+            CheckYAxis();
+            CheckXAxis();
+            await Task.Yield();
+            CheckForCameraReposition();
+            _levelManagerEventController.onCameraReady.Trigger();
         }
 
-        float GetTopScreenY()
+        void CheckForCameraReposition()
         {
-            return _camera.ViewportToWorldPoint(new Vector3(1.0f, 1.0f, 0.0f)).y;
+            var bottomBarTopY = GetBottomScreen().y + (GetTopScreen().y - GetBottomScreen().y) *
+                _bottomBarBorder.sizeDelta.y / _mainCanvas.GetComponent<RectTransform>().sizeDelta.y;
+            var deltaPos = _groundRenderer.bounds.min.y  - bottomBarTopY;
+            _camera.transform.position += deltaPos * Vector3.up;
         }
 
-        float GetBottomScreenY()
+        void CheckYAxis()
         {
-            return _camera.ViewportToWorldPoint(Vector3.zero).y;
+            var cupMin = _groundRenderer.bounds.min;
+            if (_tubeMax.y <= GetTopScreen().y)
+                return;
+            var length = (_tubeMax.y - cupMin.y) * 1.2f;
+            _camera.orthographicSize *= length / (GetTopScreen().y - GetBottomScreen().y);
+        }
+
+        void CheckXAxis()
+        {
+            var screenLeft = GetBottomScreen().x;
+            var screenRight = GetTopScreen().x;
+            if (_tubeMax.x < screenRight && _tubeMin.x > screenLeft)
+                return;
+            var length = screenRight - screenLeft;
+            if (_tubeMax.x > screenRight)
+                length += _tubeMax.x - screenRight;
+            if (_tubeMin.x < screenLeft)
+                length += screenLeft - _tubeMin.x;
+            length *= 1.2f;
+            _camera.orthographicSize *= length / (screenRight - screenLeft);
+        }
+
+        Vector3 GetTopScreen()
+        {
+            return _camera.ViewportToWorldPoint(new Vector3(1.0f, 1.0f, 0.0f));
+        }
+
+        Vector3 GetBottomScreen()
+        {
+            return _camera.ViewportToWorldPoint(Vector3.zero);
         }
 
         #endregion
