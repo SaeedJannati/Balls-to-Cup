@@ -27,7 +27,7 @@ namespace BallsToCup.General
             }
             catch (Exception e)
             {
-                BtcLogger.Log("Couldn't parse progress data!,exception:{e}",BtcLogger.Colours.lightRed);
+                BtcLogger.Log($"Couldn't parse progress data!,exception:{e}",BtcLogger.Colours.lightRed);
                 return default;
             }
         }

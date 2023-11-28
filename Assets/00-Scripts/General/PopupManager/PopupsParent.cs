@@ -47,9 +47,9 @@ namespace BallsToCup.General.Popups
             _popupManager.onPopupCreated -= OnPopupCreated;
         }
         [Button]
-        void RequestPopup()
+       private async void RequestPopup()
         {
-            _popupManager.RequestPopup(
+          await  _popupManager.RequestPopup(
                 _popupName);
         }
          #endregion
