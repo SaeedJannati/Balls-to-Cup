@@ -61,8 +61,8 @@ namespace BallsToCup.Core.Gameplay
         {
             var resultPanel = (GameResultPanelLogic)await _popupManager.RequestPopup(PopupName.GameResult);
             resultPanel
-                .SetTitle("Win")
-                .SetMessage("You won!")
+                .SetTitle("Lose")
+                .SetMessage("You Lost!")
                 .SetNextLevelActive(false)
                 .SetStars(0);
         }
@@ -74,7 +74,7 @@ namespace BallsToCup.Core.Gameplay
             var resultPanel = (GameResultPanelLogic)await _popupManager.RequestPopup(PopupName.GameResult);
             resultPanel
                 .SetTitle("Win")
-                .SetMessage("You won!")
+                .SetMessage("You Won!")
                 .SetNextLevelActive(!isLastLevel)
                 .SetStars(starsCount);
 

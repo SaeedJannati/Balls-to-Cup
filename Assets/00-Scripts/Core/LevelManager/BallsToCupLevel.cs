@@ -15,7 +15,7 @@ namespace BallsToCup.Core.Gameplay
         [SerializeField,InspectorReadOnly] public int index;
       
         [field: SerializeField] public int ballsCount { get; private set; }
-        [field: SerializeField] public float controllerSensitivity { get; private set; } = 1.0f;
+        [field: SerializeField] public float maxControllerSensitivity { get; private set; } = 1.0f;
         [field: SerializeField] public float ballDiameter { get; private set; } = .15f;
         [field: SerializeField] public float ballsFriction { get; private set; } = .6f;
         [field: SerializeField] public float ballsBounce { get; private set; } = 0.0f;

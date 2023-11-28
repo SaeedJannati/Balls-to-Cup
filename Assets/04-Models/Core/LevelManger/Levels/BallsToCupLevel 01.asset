@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   <ballsCount>k__BackingField: 20
-  <controllerSensitivity>k__BackingField: 1
+  <maxControllerSensitivity>k__BackingField: 3
   <ballDiameter>k__BackingField: 0.3
   <ballsFriction>k__BackingField: 0.6
   <ballsBounce>k__BackingField: 0

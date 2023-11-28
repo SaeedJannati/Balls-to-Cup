@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using BallsToCup.General;
-using UnityEngine;
 using Zenject;
 
 namespace BallsToCup.Core.Gameplay
@@ -13,7 +10,6 @@ namespace BallsToCup.Core.Gameplay
 
         [Inject] private GameManagerEventController _gameManagerEventController;
         private readonly CoreBallView _view;
-
         #endregion
 
         #region Constructors
@@ -25,6 +21,7 @@ namespace BallsToCup.Core.Gameplay
 
         #endregion
 
+   
         #region Methods
 
         public void Dispose()

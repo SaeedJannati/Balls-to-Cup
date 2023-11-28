@@ -77,9 +77,9 @@ namespace BallsToCup.Core.Gameplay
 
         private BallsToCupLevel OnCurrentLevelRequest() => _currentLevel;
 
-        private (float sensitivityVelocity, float moveThreshold) OnCurrentLevelRotateControlInfoRequest()
+        private (float maxSesivity, float moveThreshold) OnCurrentLevelRotateControlInfoRequest()
         {
-            return (_currentLevel.controllerSensitivity, _currentLevel.tubeDistanceToGround);
+            return (_currentLevel.maxControllerSensitivity,_currentLevel.tubeDistanceToGround);
         }
 
      

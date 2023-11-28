@@ -7,5 +7,7 @@ namespace BallsToCup.Core
     {
         public readonly ListFuncEvent<Vector3> onPivotTransformRequest = new();
         public readonly ListEvent<bool> onBallTriggerEdge = new();
+        
+
     }
 }
