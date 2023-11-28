@@ -40,7 +40,6 @@ namespace BallsToCup.Core.UI
 
         public void OnHomeClick()
         {
-            BtcLogger.Log("OnHomeClick");
             _sceneLoader.LoadScene(2, () => { _sceneLoader.LoadScene(0); });
         }
 

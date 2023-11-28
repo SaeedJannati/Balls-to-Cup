@@ -17,3 +17,8 @@ MonoBehaviour:
     type: 2}
   _playerProgressModel: {fileID: 11400000, guid: 3d87dfb0a0dad0d47adb7926e33b8912,
     type: 2}
+  _generalSettingsModel: {fileID: 11400000, guid: 8e08fc9ce589426428a42f0017a5ff53,
+    type: 2}
+  _audioHandlerClipLibrary: {fileID: 11400000, guid: 83f74a6d2808569438952c7104cb67e7,
+    type: 2}
+  _audioHandlerModel: {fileID: 11400000, guid: 53c5a42945cae994a89f5e26931605ab, type: 2}
