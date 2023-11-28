@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BallsToCup.General;
+using BallsToCupGeneral.Audio;
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
@@ -19,32 +20,68 @@ namespace BallsToCup.Core.UI
         [SerializeField] private Image _button_audio;
         [SerializeField] private Image _button_music;
         [SerializeField] private CanvasGroup _canvasGroup;
+        [SerializeField] private AudioPlayer _clickAudioPalyer;
         [Inject] private PlayerProgressManager _progressManager;
         [Inject] private SceneLoader _sceneLoader;
+        [Inject] private GeneralSettingsEventHandler _generalSettingsEventHandler;
         #endregion
 
-        #region Methods
+        #region unity actions
 
+        private void Start()
+        {
+            InitialiseAudioSettings();
+        }
+
+        #endregion
+        #region Methods
+ 
+        void InitialiseAudioSettings()
+        {
+            var audioSettings = _generalSettingsEventHandler.onAudioSettingsRequest.GetFirstResult();
+            var sfxEnable = audioSettings?.sfxEnable ?? true;
+            var musicEnable = audioSettings?.musicEnable ?? true;
+            _button_music.color = _model.colourInfos.FirstOrDefault(i => i.enable == musicEnable).colour;
+            _button_audio.color = _model.colourInfos.FirstOrDefault(i => i.enable == sfxEnable).colour;
+        }
+      
         public void OnMusicClick()
         {
+            _clickAudioPalyer.Play();
+            var audioSettings = _generalSettingsEventHandler.onAudioSettingsRequest.GetFirstResult();
+            var musicEnable = audioSettings?.musicEnable ?? true;
+            musicEnable = !musicEnable;
+            _button_music.color = _model.colourInfos.FirstOrDefault(i => i.enable == musicEnable).colour;
+            audioSettings.musicEnable = musicEnable;
+            _generalSettingsEventHandler.onAudioSettingsSaveRequest.Trigger(audioSettings);
         }
 
         public void OnAudioClick()
         {
+            _clickAudioPalyer.Play();
+            var audioSettings = _generalSettingsEventHandler.onAudioSettingsRequest.GetFirstResult();
+            var sfxEnable = audioSettings?.sfxEnable ?? true;
+            sfxEnable = !sfxEnable;
+            _button_audio.color = _model.colourInfos.FirstOrDefault(i => i.enable == sfxEnable).colour;
+            audioSettings.sfxEnable = sfxEnable;
+            _generalSettingsEventHandler.onAudioSettingsSaveRequest.Trigger(audioSettings);
         }
 
         public void OnResumeClick()
         {
+            _clickAudioPalyer.Play();
             BringDown();
         }
 
         public void OnHomeClick()
         {
+            _clickAudioPalyer.Play();
             _sceneLoader.LoadScene(2, () => { _sceneLoader.LoadScene(0); });
         }
 
         public void OnRetryClick()
         {
+            _clickAudioPalyer.Play();
             _sceneLoader.LoadScene(2, () => { _sceneLoader.LoadScene(1); });
         }
 

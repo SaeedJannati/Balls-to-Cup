@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BallsToCup.General;
+using BallsToCupGeneral.Audio;
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace BallsToCup.Meta.UI
         [SerializeField,Expandable] private MetaSelectLevelPanelModel _model;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Transform _levelsViewsParent;
+        [SerializeField] private AudioPlayer _clickAudio;
+        [SerializeField] private AudioPlayer _spawnLevelAudio;
         private bool _isClosing;
         private List<MetaSelectLevelLevelView> _levelsViews = new();
         #endregion
@@ -70,6 +73,7 @@ namespace BallsToCup.Meta.UI
 
         public void OnCloseClick()
         {
+            _clickAudio.Play();
             if (_isClosing)
                 return;
             _isClosing = true;
@@ -113,6 +117,7 @@ namespace BallsToCup.Meta.UI
             yield return delay;
             for (int i = 0,e=_levelsViews.Count; i < e; i++)
             {
+                _spawnLevelAudio.Play();
                 _levelsViews[i]._backTransform.DOScale(1.0f, _model.levelItemScalePeriod).SetEase(Ease.OutBounce);
                 yield return delay;
             }
@@ -120,6 +125,7 @@ namespace BallsToCup.Meta.UI
 
         void OnLevelSelect(int levelIndex)
         {
+            _clickAudio.Play();
             _progressManager.OnSelectLevel(levelIndex);
             _sceneLoader.LoadScene(2, () => { _sceneLoader.LoadScene(1);});
         }

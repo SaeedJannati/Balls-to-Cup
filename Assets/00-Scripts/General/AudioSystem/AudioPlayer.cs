@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BallsToCup.General;
 using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
@@ -103,8 +104,17 @@ namespace BallsToCupGeneral.Audio
 #if UNITY_EDITOR
             var dataExtractor = new AudioHandlerDataExtractor()
                 .SetModel(_clipLibrary);
+           
             var sceneName = GetSceneName();
-            var library = dataExtractor.GetSceneAudioLibrary(sceneName);
+            SceneAudioLibrary library;
+            if (_isGeneralLibrary)
+            {
+                library = dataExtractor.LoadGeneralLibrary();
+            }
+            else
+            {
+                library=dataExtractor.GetSceneAudioLibrary(sceneName);
+            }
             if (library == default)
                 return;
             if (library.clipsData == default)

@@ -15,4 +15,49 @@ MonoBehaviour:
   sceneName: Core
   isGeneralLibrary: 0
   scene: {fileID: 102900000, guid: 93ee29fe72113b7428814c0a6f4bcb7e, type: 3}
-  clipsData: []
+  clipsData:
+  - clipName: Main Theme
+    clipReference:
+      m_AssetGUID: d1aba70e931614946b6ec30ed291caac
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    mixerGroup: {fileID: 4515842743136092793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
+      type: 2}
+    volume: 0.504
+  - clipName: Ball get inside cup
+    clipReference:
+      m_AssetGUID: e7e53cfea89a95f409f3cecfca414be4
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
+      type: 2}
+    volume: 1
+  - clipName: Ball wave creation
+    clipReference:
+      m_AssetGUID: 0381d7185ca5d094b80839b1888f192e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
+      type: 2}
+    volume: 0.74
+  - clipName: Win
+    clipReference:
+      m_AssetGUID: 900e0555ab6dc2c42ac606abb4c5544b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
+      type: 2}
+    volume: 0.74
+  - clipName: Lose
+    clipReference:
+      m_AssetGUID: 25b6a4e21ba25ee4693a0f5005cf80ce
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
+      type: 2}
+    volume: 0.74

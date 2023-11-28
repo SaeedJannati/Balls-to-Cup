@@ -15,4 +15,22 @@ MonoBehaviour:
   sceneName: Meta
   isGeneralLibrary: 0
   scene: {fileID: 102900000, guid: 265730f0088eac943b6232cf25b234c4, type: 3}
-  clipsData: []
+  clipsData:
+  - clipName: MainTheme
+    clipReference:
+      m_AssetGUID: ba5b37a0a141cd840a7a03bf2b1db220
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    mixerGroup: {fileID: 4515842743136092793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
+      type: 2}
+    volume: 0.613
+  - clipName: Level Spawn
+    clipReference:
+      m_AssetGUID: b6a15e372ec214d4c8c951f9427eb639
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
+      type: 2}
+    volume: 0.455

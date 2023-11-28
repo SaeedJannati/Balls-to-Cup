@@ -15,4 +15,13 @@ MonoBehaviour:
   sceneName: 
   isGeneralLibrary: 1
   scene: {fileID: 0}
-  clipsData: []
+  clipsData:
+  - clipName: Click
+    clipReference:
+      m_AssetGUID: 315a87b72e64f9846932256c0d58093b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
+      type: 2}
+    volume: 1
