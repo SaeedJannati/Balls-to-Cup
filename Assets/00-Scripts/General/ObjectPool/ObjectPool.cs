@@ -76,7 +76,7 @@ namespace BallsToCup.General
                     {
                         GameObject.Destroy(_pool[i].gameObject);
                     }
-                    catch (Exception e)
+                    catch 
                     {
                         
                     }

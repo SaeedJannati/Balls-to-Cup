@@ -12,7 +12,7 @@ namespace BallsToCup.Core.Gameplay
 
         [field: SerializeField] public PhysicMaterial ballsPhysiscMaterial { get; private set; }
         [field: SerializeField] public List<Material> ballMaterials { get; private set; }
-
+        [field: SerializeField] public float maxTubeRotVelocity { get; private set; }
         #endregion
     }
 }
