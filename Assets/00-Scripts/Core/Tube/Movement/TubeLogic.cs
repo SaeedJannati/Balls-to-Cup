@@ -24,7 +24,7 @@ public class TubeLogic : IDisposable
     private float _maxRotFactor;
     private bool _inputEnable;
     private float _maxDistance;
-
+    private bool _isPlayingAudio;
     #endregion
 
     #region Constructor
@@ -61,6 +61,14 @@ public class TubeLogic : IDisposable
         _maxRotFactor = info.maxSensitivity;
     }
 
+    private void PlayAudio(bool play)
+    {
+        if(play==_isPlayingAudio)
+            return;
+        _isPlayingAudio = play;
+        _eventController.onPlayTubeDragAudioRequest.Trigger(play);
+    }
+
     public void Dispose()
     {
         UnregisterFromEvent();
@@ -76,6 +84,7 @@ public class TubeLogic : IDisposable
         _draggable.onDrag += OnDrag;
         _draggable.onDragDelta += OnDragDelta;
         _draggable.onDragBegin += OnDragBegin;
+        _draggable.onDragEnd += OnDragEnd;
     }
 
     private void UnregisterFromEvent()
@@ -86,6 +95,13 @@ public class TubeLogic : IDisposable
             return;
         _draggable.onDrag -= OnDrag;
         _draggable.onDragDelta -= OnDragDelta;
+        _draggable.onDragBegin -= OnDragBegin;
+        _draggable.onDragEnd -= OnDragEnd;
+    }
+
+    private void OnDragEnd(Vector2 pointerPos)
+    {
+      PlayAudio(false);
     }
 
 
@@ -127,7 +143,11 @@ public class TubeLogic : IDisposable
     private void CheckForRotation()
     {
         if (_deltaPointerPos.sqrMagnitude < _moveThreshold * _moveThreshold)
+        {
             return;
+        }
+
+        PlayAudio(true);
         var currentPos = _currentPointerPos - _pivotPointOnScreen;
         var lastPos = _currentPointerPos - _deltaPointerPos - _pivotPointOnScreen;
         var currentAngle = CalcAngleWithXAxis(currentPos);

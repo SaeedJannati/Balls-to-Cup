@@ -16,7 +16,17 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: ee8c78dbf44db8b4faf7d3f91e4ab675
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 848913b89d02712439161b3b1a2ceb0d
+    m_Address: Assets/12-Audios/Audios/metal-on-metal-25690.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61c7b81d11825ef4a9fa28754a46847c
+    m_Address: Assets/12-Audios/Audios/stone_sliding-54021.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9346bd039b6edef4abf9c790adb02889, type: 2}
   m_SchemaSet:

@@ -92,7 +92,7 @@ namespace BallsToCup.Core.Gameplay
                         }
                     }
                 }
-
+                _tubeEventController.onBallWaveGeneration.Trigger();
                 yield return delay;
             }
         }

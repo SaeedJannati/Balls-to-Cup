@@ -7,6 +7,7 @@ namespace BallsToCup.Core
     {
         public readonly ListFuncEvent<Vector3> onPivotTransformRequest = new();
         public readonly ListFuncEvent<(Vector3 min,Vector3 max)> onTubeBoundsRequest = new();
-
+        public readonly SimpleEvent<bool> onPlayTubeDragAudioRequest = new();
+        public ListEvent onBallWaveGeneration = new();
     }
 }

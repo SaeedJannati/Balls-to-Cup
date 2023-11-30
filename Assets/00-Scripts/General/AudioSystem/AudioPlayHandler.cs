@@ -72,7 +72,18 @@ namespace BallsToCupGeneral.Audio
             _audioSource.DOFade(destVolume, fadeDuration);
             return this;
         }
-
+        public AudioPlayHandler FadeOutStop(AudioClip clip, AudioMixerGroup group, float volume, float fadeDuration)
+        {
+            // Play(clip, group, volume,true);
+            var destVolume = _audioSource.volume;
+            _audioSource.volume = destVolume;
+            _audioSource.DOFade(0.0f, fadeDuration).onComplete = () =>
+            {
+                Stop();
+            };
+            return this;
+        }
+        
         public void Fade(Action onComplete = default)
         {
             var tween = _audioSource.DOFade(0.0f, 1.0f);
