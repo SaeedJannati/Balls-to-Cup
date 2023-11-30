@@ -16,3 +16,5 @@ MonoBehaviour:
   _levelManagerModel: {fileID: 11400000, guid: f1b30e86924459d47910ac856704f334, type: 2}
   _ballGeneratorModel: {fileID: 11400000, guid: 1d5e31267bc2d2549a00506847bdb52f,
     type: 2}
+  _flowControllerModel: {fileID: 11400000, guid: 2c5bf9a0c3cd83d469354e0fcfa55397,
+    type: 2}
