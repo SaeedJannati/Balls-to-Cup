@@ -51,7 +51,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
       type: 2}
-    volume: 0.74
+    volume: 1
   - clipName: Lose
     clipReference:
       m_AssetGUID: 25b6a4e21ba25ee4693a0f5005cf80ce
@@ -60,4 +60,13 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
       type: 2}
-    volume: 0.74
+    volume: 1
+  - clipName: TubeRotate
+    clipReference:
+      m_AssetGUID: 61c7b81d11825ef4a9fa28754a46847c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
+      type: 2}
+    volume: 0.347

@@ -98,7 +98,10 @@ namespace BallsToCupGeneral.Audio
             return _handler;
         }
 
-
+        public void FadeOutStop(float fadeDuration)
+        {
+            _audioHandler.FadeOutStop(_handler,clipName, fadeDuration);
+        }
         void InitialiseClipNames()
         {
 #if UNITY_EDITOR

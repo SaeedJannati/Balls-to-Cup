@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b62e55d680db164439a6f55812c9bc47
+    m_Address: Assets/05-Prefabs/Core/Effects/WinEffect.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9346bd039b6edef4abf9c790adb02889, type: 2}
   m_SchemaSet:

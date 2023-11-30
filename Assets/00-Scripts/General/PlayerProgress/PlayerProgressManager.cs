@@ -4,7 +4,7 @@ using Zenject;
 
 namespace BallsToCup.General
 {
-    public class PlayerProgressManager:IDisposable
+    public class PlayerProgressManager:IDisposable,IEventListener
     {
         #region Fields
 
@@ -13,6 +13,12 @@ namespace BallsToCup.General
         #endregion
         
         #region Methods
+
+        [Inject]
+        private void Initialise()
+        {
+            RegisterToEvents();
+        }
 
         public bool IsSelectedLevelLast()
         {
@@ -97,11 +103,37 @@ namespace BallsToCup.General
 
         public void Dispose()
         {
+            UnregisterFromEvents();
             GC.SuppressFinalize(this);
         }
+        public void RegisterToEvents()
+        {
+            SROptions.onUnlockLevelRequest.Add(OnUnlockLevelRequest);
+        }
+
+        public void UnregisterFromEvents()
+        {
+          SROptions.onUnlockLevelRequest.Remove(OnUnlockLevelRequest);
+        }
+
+        private void OnUnlockLevelRequest(int level)
+        {
+            if(level<1)
+            {
+                BtcLogger.Log($"No such level as {level} exists!",BtcLogger.Colours.lightRed);
+            }
+            if (level > _model._levelManagerModel.levels.Count )
+            {
+                BtcLogger.Log($"There are {_model._levelManagerModel.levels.Count} levels therefore no such level as {level} exists!",BtcLogger.Colours.lightRed);
+            }
+
+            SetLastUnlocked(level-1);
+        }
+
         #endregion
 
-        
+
+       
     }
     
 }

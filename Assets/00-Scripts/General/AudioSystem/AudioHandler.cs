@@ -60,7 +60,13 @@ namespace BallsToCupGeneral.Audio
             _coroutineHelper.StartCoroutine(FadeInPlayRoutine(player, clipName, fadeDuration));
             return player;
         }
-
+        public void FadeOutStop(AudioPlayHandler  player,string clipName, float fadeDuration)
+        {
+            // var player = _audioPlayers.GetObject();
+            _coroutineHelper.StartCoroutine(FadeOutStopRoutine(player, clipName, fadeDuration));
+            // return player;
+        }
+        
         IEnumerator FadeInPlayRoutine(AudioPlayHandler player, string clipName, float fadeDuration)
         {
             while (!_initialised)
@@ -73,7 +79,19 @@ namespace BallsToCupGeneral.Audio
                 yield break;
             player.FadeInPlay(clipData.clip, clipData.group, clipData.volume, fadeDuration);
         }
+        IEnumerator FadeOutStopRoutine(AudioPlayHandler player, string clipName, float fadeDuration)
+        {
+            while (!_initialised)
+            {
+                yield return null;
+            }
 
+            var clipData = GetClip(clipName);
+            if (clipData.clip == default)
+                yield break;
+            player.FadeOutStop(clipData.clip, clipData.group, clipData.volume, fadeDuration);
+        }
+        
         IEnumerator PlayClipRoutine(AudioPlayHandler player, string clipName, bool loop)
         {
             if (!_initialised)
