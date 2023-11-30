@@ -22,7 +22,8 @@ namespace BallsToCup.Core.UI
         [SerializeField] private AudioPlayer _clickAudioPalyer;
         [SerializeField] private AudioPlayer _ballGetInsideCupAudio;
         [SerializeField] private AudioPlayer    _ballsCreationWave;
-
+        [SerializeField] private AudioPlayer _winAudioPlayer;
+        [SerializeField] private AudioPlayer _loseAudioPlayer;
         #endregion
 
         #region Unity actions
@@ -45,12 +46,26 @@ namespace BallsToCup.Core.UI
         {
             _gameManagerEventController.onTotalBallsChange.Add(OnTotalBallsChange);
             _gameManagerEventController.onBallsInCupChange.Add(OnBallsInCupChange);
+            _gameManagerEventController.onGameWon.Add(OnGameWon);
+            _gameManagerEventController.onGameLose.Add(OnGameLose);
         }
 
         public void UnregisterFromEvents()
         {
             _gameManagerEventController.onTotalBallsChange.Remove(OnTotalBallsChange);
             _gameManagerEventController.onBallsInCupChange.Remove(OnBallsInCupChange);
+            _gameManagerEventController.onGameWon.Remove(OnGameWon);
+            _gameManagerEventController.onGameLose.Remove(OnGameLose);
+        }
+
+        private void OnGameLose()
+        {
+            _loseAudioPlayer.Play();
+        }
+
+        private void OnGameWon(int startsCount)
+        {
+            _winAudioPlayer.Play();
         }
 
         private void OnBallsInCupChange(int count)

@@ -846,6 +846,55 @@ MonoBehaviour:
   _swipeInput: {fileID: 1081712312}
   _ballGenerator: {fileID: 89178503}
   _yCriterion: {fileID: 1987237169}
+--- !u!1 &273083927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 273083928}
+  - component: {fileID: 273083929}
+  m_Layer: 0
+  m_Name: AudioPlayer_Lose
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &273083928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273083927}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 983405913}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &273083929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273083927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f71ea927234d345b00d71abe4741dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clipLibrary: {fileID: 11400000, guid: 83f74a6d2808569438952c7104cb67e7, type: 2}
+  _isGeneralLibrary: 0
+  _loop: 0
+  _playOnEnable: 0
+  clipName: Lose
 --- !u!1 &443918061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1496,6 +1545,8 @@ MonoBehaviour:
   _clickAudioPalyer: {fileID: 1998187986}
   _ballGetInsideCupAudio: {fileID: 482977127}
   _ballsCreationWave: {fileID: 443918063}
+  _winAudioPlayer: {fileID: 1958948523}
+  _loseAudioPlayer: {fileID: 273083929}
 --- !u!1 &742368657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,6 +1778,8 @@ Transform:
   - {fileID: 541087060}
   - {fileID: 482977126}
   - {fileID: 443918062}
+  - {fileID: 1958948522}
+  - {fileID: 273083928}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2908,6 +2961,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836789293}
   m_CullTransparentMesh: 1
+--- !u!1 &1958948521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1958948522}
+  - component: {fileID: 1958948523}
+  m_Layer: 0
+  m_Name: AudioPlayer_Win
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1958948522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958948521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 983405913}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1958948523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958948521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f71ea927234d345b00d71abe4741dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clipLibrary: {fileID: 11400000, guid: 83f74a6d2808569438952c7104cb67e7, type: 2}
+  _isGeneralLibrary: 0
+  _loop: 0
+  _playOnEnable: 0
+  clipName: Win
 --- !u!1 &1987237166
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BallsToCupGeneral.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ namespace BallsToCup.General.Popups
         [SerializeField] private TMP_Text _text_message;
         [field: SerializeField] public List<Image> starsForegrounds { get; private set; }
         [SerializeField] private GameObject _nextButton;
+        [SerializeField] private AudioPlayer _clickAudio;
         private GameResultPanelEventController _eventController;
 
         #endregion
@@ -56,18 +58,27 @@ namespace BallsToCup.General.Popups
             return this;
         }
 
+        public GameResultPanelView SetAudioHandler(AudioHandler audioHandler)
+        {
+            _clickAudio.SetAudioHandler(audioHandler);
+            return this;
+        }
+
         public void OnHomeClick()
         {
+            _clickAudio.Play();
             _eventController.onHomeClick.Trigger();
         }
 
         public void OnRetryClick()
         {
+            _clickAudio.Play();
             _eventController.onRetryClick.Trigger();
         }
 
         public void OnNextLevelClick()
         {
+            _clickAudio.Play();
             _eventController.onNextLevelClick.Trigger();
         }
 

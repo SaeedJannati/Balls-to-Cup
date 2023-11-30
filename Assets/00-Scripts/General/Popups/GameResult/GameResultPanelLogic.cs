@@ -1,4 +1,5 @@
 ﻿using System;
+using BallsToCupGeneral.Audio;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace BallsToCup.General.Popups
         [Inject] private GameResultPanelModel _model;
         [Inject] private PlayerProgressManager _progressManager;
         [Inject] private SceneLoader _sceneLoader;
+        [Inject] private AudioHandler _audioHandler;
         private bool _isClosing = false;
 
         #endregion
@@ -41,7 +43,8 @@ namespace BallsToCup.General.Popups
         void InitialiseView()
         {
             _view
-                .SetEventController(_eventController);
+                .SetEventController(_eventController)
+                .SetAudioHandler(_audioHandler);
         }
 
         void SetView(IPopupView view)
