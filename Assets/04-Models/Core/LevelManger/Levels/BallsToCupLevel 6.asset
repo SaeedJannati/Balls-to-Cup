@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971e75c9cc854752a39c1c0aca5cc2b3, type: 3}
   m_Name: BallsToCupLevel 6
   m_EditorClassIdentifier: 
-  index: 4
+  index: 5
   <ballsCount>k__BackingField: 75
   <maxControllerSensitivity>k__BackingField: 2
   <ballDiameter>k__BackingField: 0.17

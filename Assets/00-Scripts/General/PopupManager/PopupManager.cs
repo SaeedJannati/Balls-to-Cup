@@ -26,12 +26,9 @@ namespace BallsToCup.General.Popups
         [Inject] private GameResultPanelLogic.Factory _gameResultFactory;
         #endregion
         #endregion
-
- 
-
         #region Methods
 
-        public async void ShowLoading()
+        public async Task ShowLoading()
         {
             _showingLoading = true;
             _loadingPanel ??= (LoadingPanelLogic)await RequestPopup(PopupName.Loading);
@@ -41,6 +38,7 @@ namespace BallsToCup.General.Popups
             }
 
             _loadingPanel.Show();
+            await Task.Yield();
             _showingLoading = false;
         }
 

@@ -9,17 +9,19 @@ using Zenject;
 
 namespace BallsToCup.Meta.Levels
 {
-    public class LevelExtractor : MonoBehaviour,IEventListener
+    public class LevelExtractor : MonoBehaviour, IEventListener
     {
         #region Fields
+
         [Inject] private AddressableLoader _addressableLoader;
         [Inject] private LevelExtractorSvgParser.Factory _svgParserFactory;
         [Inject] private LevelExtractorEventController _eventController;
         [Inject] private LevelExtractorTubeCreator.Factory _tubeCreatorFactory;
-        [SerializeField,Expandable] private LevelExtractorModel _model;
-        [SerializeField]    private TextAsset _level;
+        [SerializeField, Expandable] private LevelExtractorModel _model;
+        [SerializeField] private TextAsset _level;
         private LevelExtractorSvgParser _svgParser;
         private LevelExtractorTubeCreator _tubeCreator;
+   
         #endregion
 
         #region Unity actions
@@ -35,6 +37,7 @@ namespace BallsToCup.Meta.Levels
         }
 
         #endregion
+
         #region Methods
 
         [Inject]
@@ -53,19 +56,17 @@ namespace BallsToCup.Meta.Levels
         public async Task<TubeComposite> CreateLevelTube(TextAsset level)
         {
             var path = _svgParser.ParseLevelAndExtractPointsOnSpline(level);
-          return  await _tubeCreator.CreateTube(path);
+            return await _tubeCreator.CreateTube(path);
         }
+
         public void RegisterToEvents()
         {
-          
         }
 
         public void UnregisterFromEvents()
         {
-            
         }
-        #endregion
 
-   
+        #endregion
     }
 }

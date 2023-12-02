@@ -17,7 +17,7 @@ MonoBehaviour:
   <material>k__BackingField: {fileID: 2100000, guid: 6d46d42fe82c32048bfa4d95fae7081e,
     type: 2}
   <tubeCompositePrefab>k__BackingField:
-    m_AssetGUID: 7b66717302a02e546b630570d864954f
+    m_AssetGUID: 1bfd213ed4ecdad4094c1f5263c19c50
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

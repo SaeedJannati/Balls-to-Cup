@@ -99,9 +99,9 @@ namespace BallsToCup.Meta.Levels
                 segment = contours.Segments[i];
                 nextSegment = contours.Segments[i + 1];
                 pointsOnPath =
-                    pointsOnPath.Concat(GetWayPointsOnBezierCurve(segment.P0, segment.P1, segment.P2, nextSegment.P0))
+                    pointsOnPath.Concat(GetWayPointsOnBezierCurve(segment.P0, segment.P1, segment.P2, nextSegment.P0,_model.bezierSegmentPoinstCount))
                         .ToList();
-                DrawBezierCurve(segment.P0, segment.P1, segment.P2, nextSegment.P0, 10, i);
+                DrawBezierCurve(segment.P0, segment.P1, segment.P2, nextSegment.P0, _model.bezierSegmentPoinstCount, i);
             }
 
             if (pointsOnPath[^1].y < pointsOnPath[0].y)

@@ -13,6 +13,7 @@ namespace BallsToCup.Meta.Levels
         [field:SerializeField] public AssetReference tubeCompositePrefab{ get; private set; }
         [field: SerializeField] public float tubeRadius { get; private set; } = 8.0f;
         [field: SerializeField] public int radialSegmentsCount { get; private set; } = 8;
+        [field: SerializeField] public int bezierSegmentPoinstCount { get; private set; } = 10;
 
         #endregion
 

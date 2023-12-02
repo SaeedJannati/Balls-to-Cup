@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BallsToCup.General;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Zenject;
@@ -23,6 +22,14 @@ namespace BallsToCup.Meta.Levels
 
         public async Task<TubeComposite> CreateTube(List<Vector3> pointsOnPath)
         {
+            //Just to keep huge tube somewhere outside of camera POV
+            //TODO: find some more efficient way 
+            for (int i = 0, e = pointsOnPath.Count; i < e; i++)
+            {
+                pointsOnPath[i] += -300 * Vector3.one;
+            }
+
+
             int radialSegmentsCount = _model.radialSegmentsCount;
             float radius = _model.tubeRadius;
             var geometry = CreateTubeGeometryWithThickness(pointsOnPath.ToArray(), radius, radialSegmentsCount, 2f);
