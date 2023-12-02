@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a874c03d5584f81a465cd0eae43d465, type: 3}
+  m_Name: LevelExtractorModel
+  m_EditorClassIdentifier: 
+  <pointOnPath>k__BackingField: {fileID: 7028591611953721281, guid: 5517f6a4d861ac34286e92f998edc53f,
+    type: 3}
+  <material>k__BackingField: {fileID: 2100000, guid: 6d46d42fe82c32048bfa4d95fae7081e,
+    type: 2}
+  <tubeCompositePrefab>k__BackingField:
+    m_AssetGUID: 7b66717302a02e546b630570d864954f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <tubeRadius>k__BackingField: 8
+  <radialSegmentsCount>k__BackingField: 8
