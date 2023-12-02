@@ -19,6 +19,7 @@ namespace BallsToCup.Meta.Levels
         [SerializeField] private List<TextAsset> _levels;
         [SerializeField] private GameObject _pointOnPath;
         [SerializeField] private Material _material;
+
         #endregion
 
         #region Methods
@@ -102,7 +103,48 @@ namespace BallsToCup.Meta.Levels
 
             if (pointsOnPath[^1].y < pointsOnPath[0].y)
                 pointsOnPath.Reverse();
-            var obj = BuildTube(default, pointsOnPath.ToArray(), 8.0f, 8, 0.0f, default, default);
+            int segments = 8;
+            var geometry = CreateTubeGeometryWithThickness(pointsOnPath.ToArray(), 8.0f,segments ,8f);
+
+            var triangles = CreateTopTriangles(geometry.triangles, geometry.vertices, segments);
+  
+            CreateTube(triangles, geometry.vertices, geometry.uvs);
+        }
+
+        public int[] CreateTopTriangles  (int[] origTriangles,Vector3[] vertices,int segments)
+        {
+            var triangles = new int[origTriangles.Length + 3*segments*2*2];
+            for (int i = 0,e=origTriangles.Length;i < e; i++)
+            {
+                triangles[i] = origTriangles[i];
+            }
+
+            for (int i = 0; i < segments ; i++)
+            {
+                int vertIndex = vertices.Length / 2+i;
+                triangles[^(i*6+1)] = vertIndex + 1;
+                triangles[^(i*6+2)] = vertIndex;
+                triangles[^(i*6+3)] = i; 
+                
+                triangles[^(i*6+4)] = i;
+                triangles[^(i*6+5)] = i+1;
+                triangles[^(i*6+6)] = vertIndex+1;   
+            }
+
+            for (int i = 0; i < segments ; i++)
+            {
+                int innerTube = vertices.Length / 2 - segments-1 + i;
+                int vertIndex = vertices.Length -segments-1+i;
+                
+                triangles[^(i*6+1+6*segments)] = innerTube; 
+                triangles[^(i*6+2+6*segments)] = vertIndex;
+                triangles[^(i*6+3+6*segments)] = vertIndex + 1;
+                triangles[^(i*6+4+6*segments)] = vertIndex+1; 
+                triangles[^(i*6+5+6*segments)] = innerTube+1;  
+                triangles[^(i*6+6+6*segments)] = innerTube;
+            }
+            return triangles;
+
         }
 
         List<Vector3> GetWayPointsOnBezierCurve(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, int increments = 10)
@@ -136,15 +178,28 @@ namespace BallsToCup.Meta.Levels
                    + 3 * Mathf.Pow(oneMinus, 2) * t * p1 + 3 * oneMinus * t * t * p2 + Mathf.Pow(t, 3) * p3;
         }
 
-        public GameObject BuildTube(GameObject currentTube, Vector3[] originalSplinePointArray, float tubeRadius,
-            int radialSegmentsCount, float textureoffset, Texture pipeTexture, Shader pipeShader)
+        public (int[] triangles, Vector3[] vertices, Vector2[] uvs) CreateTubeGeometryWithThickness(
+            Vector3[] originalSplinePointArray, float tubeRadius,
+            int radialSegmentsCount,float thickness)
         {
-            int lengthOfSplinePointArray = originalSplinePointArray.Length;
-            Vector3[] splinePointArray = originalSplinePointArray;
-            Vector3[] splineDirectionalVectors = new Vector3[lengthOfSplinePointArray];
-            Vector3[] splineInterpolatedDirectionalVectors = new Vector3[lengthOfSplinePointArray];
-            Vector3[] splineVectorU = new Vector3[lengthOfSplinePointArray];
-            Vector3[] splineVectorV = new Vector3[lengthOfSplinePointArray];
+            var innerTubeGeometry = CalculateTubeGeometry(originalSplinePointArray, tubeRadius, radialSegmentsCount);
+            var outerTubeGeometry=CalculateTubeGeometry(originalSplinePointArray, tubeRadius+thickness, radialSegmentsCount);
+            var triangles = CombinationOfIntTriangles(innerTubeGeometry.triangles, outerTubeGeometry.triangles,
+                innerTubeGeometry.vertices.Length);
+            var vertices = innerTubeGeometry.vertices.Concat(outerTubeGeometry.vertices).ToArray();
+            var uvs = innerTubeGeometry.uvs.Concat(outerTubeGeometry.uvs).ToArray();
+            return (triangles, vertices, uvs);
+        }
+
+        public (int[] triangles,Vector3[] vertices,Vector2[] uvs) CalculateTubeGeometry(Vector3[] originalSplinePointArray, float tubeRadius,
+            int radialSegmentsCount)
+        {
+            var lengthOfSplinePointArray = originalSplinePointArray.Length;
+           var splinePointArray = originalSplinePointArray;
+           var splineDirectionalVectors = new Vector3[lengthOfSplinePointArray];
+           var splineInterpolatedDirectionalVectors = new Vector3[lengthOfSplinePointArray];
+           var splineVectorU = new Vector3[lengthOfSplinePointArray];
+           var splineVectorV = new Vector3[lengthOfSplinePointArray];
             float[] distanceBetweenTwoPointsArray = new float[lengthOfSplinePointArray];
 
             splineDirectionalVectors[0] = (splinePointArray[1] - splinePointArray[0]).normalized;
@@ -159,11 +214,10 @@ namespace BallsToCup.Meta.Levels
                  splinePointArray[lengthOfSplinePointArray - 2]).normalized;
             distanceBetweenTwoPointsArray[0] = 0.0f;
 
-            float wholeLegthOfSpline = 0.0f;
+            var wholeLegthOfSpline = 0.0f;
             for (int k = 1; k < lengthOfSplinePointArray; k++)
             {
-             
-                distanceBetweenTwoPointsArray[k] = 
+                distanceBetweenTwoPointsArray[k] =
                     (splinePointArray[k] - splinePointArray[k - 1]).magnitude;
                 wholeLegthOfSpline += distanceBetweenTwoPointsArray[k];
             }
@@ -191,9 +245,6 @@ namespace BallsToCup.Meta.Levels
                     {
                         upstandingVector = new Vector3(1.11f, 2.222222f, 0.0f);
                     }
-                    else
-                    {
-                    }
                 }
 
                 splineVectorV[k] = Vector3.Cross(upstandingVector, splineInterpolatedDirectionalVectors[k])
@@ -202,76 +253,12 @@ namespace BallsToCup.Meta.Levels
                     .normalized;
             }
 
-            if (pipeShader == null)
-            {
-                pipeShader = Shader.Find("Standard");
-            }
-
-            Mesh currentMesh;
-
-            if (currentTube == null)
-            {
-                currentTube = new GameObject("name_of_new_pipe");
-                currentTube.AddComponent<MeshRenderer>();
-                currentMesh = currentTube.AddComponent<MeshFilter>().mesh;
-            }
-            else
-            {
-                currentMesh = currentTube.GetComponent<MeshFilter>().mesh;
-            }
-
-            Vector3[] verticesTopLid = new Vector3[radialSegmentsCount + 1];
-            Vector2[] uvTopLid = new Vector2[verticesTopLid.Length];
-            int[] trianglesTopLid = new int[radialSegmentsCount * 3];
-
-            verticesTopLid[0] = splinePointArray[splinePointArray.Length - 1];
-            uvTopLid[0] = new Vector2(7f * .125f, 7f * .125f);
-
-            for (int p = 0; p < radialSegmentsCount; p++)
-            {
-                verticesTopLid[1 + p] = splinePointArray[splinePointArray.Length - 1] +
-                                          tubeRadius * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)) *
-                                          splineVectorU[splinePointArray.Length - 1]
-                                          + tubeRadius * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)) *
-                                          splineVectorV[splinePointArray.Length - 1];
-                uvTopLid[1 + p] = new Vector2(
-                    7f * 0.125f + .125f * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)),
-                    7f * 0.125f + .125f * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)));
-                trianglesTopLid[p * 3] = 1 + ((p + 1) % radialSegmentsCount);
-                trianglesTopLid[p * 3 + 1] = 1 + (p % radialSegmentsCount);
-                trianglesTopLid[p * 3 + 2] = 0;
-            }
-
-
-            Vector3[] verticesBottomLid = new Vector3[radialSegmentsCount + 1];
-            Vector2[] uvBottomLid = new Vector2[verticesBottomLid.Length];
-            int[] trianglesBottomLid = new int[radialSegmentsCount * 3];
-            verticesBottomLid[0] = splinePointArray[0];
-            uvBottomLid[0] = new Vector2(7f * 0.125f, 7f * .125f);
-
-            for (int p = 0; p < radialSegmentsCount; p++)
-            {
-                verticesBottomLid[1 + p] = splinePointArray[0] +
-                                             tubeRadius * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)) *
-                                             splineVectorU[0]
-                                             + tubeRadius * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)) *
-                                             splineVectorV[0];
-            
-                uvBottomLid[1 + p] = new Vector2(
-                    7f * .125f + .125f * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)),
-                    7f * .125f + .125f * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)));
-                trianglesBottomLid[p * 3] = 1 + (p % radialSegmentsCount);
-                trianglesBottomLid[p * 3 + 1] = 1 + ((p + 1) % radialSegmentsCount);
-                trianglesBottomLid[p * 3 + 2] = 0;
-            }
-
-
-            Vector3[] verticesCurvedSurfaceArea =
+            var verticesCurvedSurfaceArea =
                 new Vector3[(radialSegmentsCount + 1) * lengthOfSplinePointArray];
-            Vector2[] uvCurvedSurfaceArea = new Vector2[verticesCurvedSurfaceArea.Length];
-            int[] trianglesCurvedSurfaceArea =
+            var uvCurvedSurfaceArea = new Vector2[verticesCurvedSurfaceArea.Length];
+            var trianglesCurvedSurfaceArea =
                 new int[radialSegmentsCount * (lengthOfSplinePointArray - 1) * 2 * 3];
-            float currentAbsoluteLengthOfSplineInUVPosition = 0.0f;
+            var currentAbsoluteLengthOfSplineInUVPosition = 0.0f;
             for (int m = 0; m < lengthOfSplinePointArray; m++)
             {
                 currentAbsoluteLengthOfSplineInUVPosition += distanceBetweenTwoPointsArray[m];
@@ -301,22 +288,26 @@ namespace BallsToCup.Meta.Levels
                     }
                 }
             }
+            var trianglesAll = trianglesCurvedSurfaceArea;
+            var verticesAll = verticesCurvedSurfaceArea;
+            var uvAll = uvCurvedSurfaceArea;
 
-            int[] trianglesAll = combination_of_int_triangles(trianglesTopLid,trianglesBottomLid,verticesTopLid.Length);
-            Vector3[] verticesAll = verticesTopLid.Concat(verticesBottomLid).ToArray();
-            Vector2[] uvAll = uvTopLid.Concat(uvBottomLid).ToArray();
+            return (trianglesAll, verticesAll, uvAll);
+        }
 
-            trianglesAll = combination_of_int_triangles(trianglesAll,trianglesCurvedSurfaceArea,verticesAll.Length);
-            verticesAll = verticesAll.Concat(verticesCurvedSurfaceArea).ToArray();
-            uvAll = uvAll.Concat(uvCurvedSurfaceArea).ToArray();
-
+        GameObject CreateTube(int[] triangles,Vector3[] vertices,Vector2[] uvs)
+        {
+            Mesh currentMesh;
+            var currentTube = new GameObject("tube");
+            currentTube.AddComponent<MeshRenderer>();
+            currentMesh = currentTube.AddComponent<MeshFilter>().mesh;
             currentMesh.Clear();
 
-            currentMesh.vertices = verticesAll;
-            currentMesh.triangles = trianglesAll;
-            currentMesh.uv = uvAll;
+            currentMesh.vertices = vertices;
+            currentMesh.triangles = triangles;
+            currentMesh.uv = uvs;
 
-         
+           
             currentTube.GetComponent<MeshRenderer>().material = _material;
             currentMesh.RecalculateNormals();
             currentMesh.RecalculateBounds();
@@ -324,16 +315,17 @@ namespace BallsToCup.Meta.Levels
             return currentTube;
         }
 
-        private int[] combination_of_int_triangles(int[] first, int[] second, int offset)
+        private int[] CombinationOfIntTriangles(int[] first, int[] second, int offset)
         {
             int[] finalArray = new int[first.Length + second.Length];
             for (int i = 0; i < first.Length; i++)
             {
                 finalArray[i] = first[i];
             }
+
             for (int i = 0; i < second.Length; i++)
             {
-                finalArray[i+first.Length] = second[i]+offset;
+                finalArray[i + first.Length] = second[i] + offset;
             }
 
             return finalArray;
@@ -342,3 +334,65 @@ namespace BallsToCup.Meta.Levels
         #endregion
     }
 }
+
+
+
+
+
+// Vector3[] verticesTopLid = new Vector3[radialSegmentsCount + 1];
+            // Vector2[] uvTopLid = new Vector2[verticesTopLid.Length];
+            // int[] trianglesTopLid = new int[radialSegmentsCount * 3];
+            //
+            // verticesTopLid[0] = splinePointArray[splinePointArray.Length - 1];
+            // uvTopLid[0] = new Vector2(7f * .125f, 7f * .125f);
+
+            // for (int p = 0; p < radialSegmentsCount; p++)
+            // {
+            //     verticesTopLid[1 + p] = splinePointArray[splinePointArray.Length - 1] +
+            //                             tubeRadius * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)) *
+            //                             splineVectorU[splinePointArray.Length - 1]
+            //                             + tubeRadius * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)) *
+            //                             splineVectorV[splinePointArray.Length - 1];
+            //     uvTopLid[1 + p] = new Vector2(
+            //         7f * 0.125f + .125f * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)),
+            //         7f * 0.125f + .125f * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)));
+            //     trianglesTopLid[p * 3] = 1 + ((p + 1) % radialSegmentsCount);
+            //     trianglesTopLid[p * 3 + 1] = 1 + (p % radialSegmentsCount);
+            //     trianglesTopLid[p * 3 + 2] = 0;
+            // }
+
+
+            // Vector3[] verticesBottomLid = new Vector3[radialSegmentsCount + 1];
+            // Vector2[] uvBottomLid = new Vector2[verticesBottomLid.Length];
+            // int[] trianglesBottomLid = new int[radialSegmentsCount * 3];
+            // verticesBottomLid[0] = splinePointArray[0];
+            // uvBottomLid[0] = new Vector2(7f * 0.125f, 7f * .125f);
+
+            // for (int p = 0; p < radialSegmentsCount; p++)
+            // {
+            //     verticesBottomLid[1 + p] = splinePointArray[0] +
+            //                                tubeRadius * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)) *
+            //                                splineVectorU[0]
+            //                                + tubeRadius * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)) *
+            //                                splineVectorV[0];
+            //
+            //     uvBottomLid[1 + p] = new Vector2(
+            //         7f * .125f + .125f * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)),
+            //         7f * .125f + .125f * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)));
+            //     trianglesBottomLid[p * 3] = 1 + (p % radialSegmentsCount);
+            //     trianglesBottomLid[p * 3 + 1] = 1 + ((p + 1) % radialSegmentsCount);
+            //     trianglesBottomLid[p * 3 + 2] = 0;
+            // }
+            
+            
+            
+            
+            
+// int[] trianglesAll =
+//     combination_of_int_triangles(trianglesTopLid, trianglesBottomLid, verticesTopLid.Length);
+// Vector3[] verticesAll = verticesTopLid.Concat(verticesBottomLid).ToArray();
+// Vector2[] uvAll = uvTopLid.Concat(uvBottomLid).ToArray();
+
+// trianglesAll = combination_of_int_triangles(trianglesAll, trianglesCurvedSurfaceArea, verticesAll.Length);
+// verticesAll = verticesAll.Concat(verticesCurvedSurfaceArea).ToArray();
+// uvAll = uvAll.Concat(uvCurvedSurfaceArea).ToArray();
