@@ -49,7 +49,7 @@ public class TubeLogic : IDisposable
 
     private void InitialiseView()
     {
-        _view.SetEventController(_eventController).SetMaxRotVelocity(_ballGeneratorModel.maxTubeRotVelocity);
+        _view.SetEventController(_eventController).SetMaxRotVelocity(_ballGeneratorModel.maxTubeRotVelocity).Initialise();
     }
 
     private void GetRotationInfo()

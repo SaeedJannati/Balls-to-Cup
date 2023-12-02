@@ -1,4 +1,6 @@
 using BallsToCup.Core.Gameplay;
+using BallsToCup.Meta.Levels;
+using UnityEngine;
 using Zenject;
 
 namespace BallsToCup.Core.Installers
@@ -18,7 +20,8 @@ namespace BallsToCup.Core.Installers
         {
             Container.BindFactory<TubeView, TubeLogic, TubeLogic.Factory>();
             Container.BindFactory<CoreBallView, CoreBallLogic, CoreBallLogic.Factory>();
-            
+            Container.BindFactory<Transform, LevelExtractorSvgParser, LevelExtractorSvgParser.Factory>();
+            Container.BindFactory< LevelExtractorTubeCreator, LevelExtractorTubeCreator.Factory>();
         }
 
         private void BindEventControllers()
@@ -27,6 +30,7 @@ namespace BallsToCup.Core.Installers
             Container.BindInterfacesAndSelfTo<LevelManagerEventController>().AsSingle();
             Container.BindInterfacesAndSelfTo<TubeEventController>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameManagerEventController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<LevelExtractorEventController>().AsSingle();
         }
 
         private void BindManagers()

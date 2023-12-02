@@ -18,3 +18,5 @@ MonoBehaviour:
     type: 2}
   _flowControllerModel: {fileID: 11400000, guid: 2c5bf9a0c3cd83d469354e0fcfa55397,
     type: 2}
+  _levelExtractorModel: {fileID: 11400000, guid: 0d4c815066af2f043b3486483fc03603,
+    type: 2}

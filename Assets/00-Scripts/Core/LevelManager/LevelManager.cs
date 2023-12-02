@@ -36,6 +36,8 @@ namespace BallsToCup.Core.Gameplay
             ChooseLevel();
         }
 
+
+
         private void ChooseLevel()
         {
             _currentLevelIndex = _progressManager.GetSelectedLevel();
@@ -49,19 +51,23 @@ namespace BallsToCup.Core.Gameplay
         {
             _eventController.onCurrentLevelRotateControllInfoRequest.Add(OnCurrentLevelRotateControlInfoRequest);
             _eventController.onCurrentLevelRequest.Add(OnCurrentLevelRequest);
+            _eventController.onCreateTubeRequest.Add(OnTubeCreateRequest);
             _eventController.onTubeCreated.Add(OnTubeCreated);
             _eventController.onBallsGenerationComplete.Add(OnBallsGenerationComplete);
             
         }
-
         private void UnregisterFromEvents()
         {
             _eventController.onCurrentLevelRotateControllInfoRequest.Remove(OnCurrentLevelRotateControlInfoRequest);
             _eventController.onCurrentLevelRequest.Remove(OnCurrentLevelRequest);
+            _eventController.onCreateTubeRequest.Remove(OnTubeCreateRequest);
             _eventController.onTubeCreated.Remove(OnTubeCreated);
             _eventController.onBallsGenerationComplete.Remove(OnBallsGenerationComplete);
         }
-
+        private void OnTubeCreateRequest()
+        {
+            _popupManager.ShowLoading();
+        }
         private async void OnBallsGenerationComplete()
         {
             _eventController.onLevelGenerationComplete.Trigger();
@@ -72,7 +78,6 @@ namespace BallsToCup.Core.Gameplay
         private void OnTubeCreated()
         {
             _eventController.onGenerateBallsRequest.Trigger();
-            _popupManager.ShowLoading();
         }
 
         private BallsToCupLevel OnCurrentLevelRequest() => _currentLevel;

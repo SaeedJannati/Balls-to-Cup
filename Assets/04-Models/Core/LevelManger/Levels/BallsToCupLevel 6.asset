@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971e75c9cc854752a39c1c0aca5cc2b3, type: 3}
+  m_Name: BallsToCupLevel 6
+  m_EditorClassIdentifier: 
+  index: 5
+  <ballsCount>k__BackingField: 75
+  <maxControllerSensitivity>k__BackingField: 2
+  <ballDiameter>k__BackingField: 0.17
+  <ballsFriction>k__BackingField: 0.6
+  <ballsBounce>k__BackingField: 0
+  <ballMass>k__BackingField: 1
+  <gravity>k__BackingField: 9.81
+  <endGameDelay>k__BackingField: 3
+  <tubeDistanceToGround>k__BackingField: 10
+  <starRatios>k__BackingField:
+  - _index: 0
+    index: 0
+    _ballsRatioPercentage: 42.666668
+    <requiredBalls>k__BackingField: 32
+  - _index: 1
+    index: 1
+    _ballsRatioPercentage: 66.666664
+    <requiredBalls>k__BackingField: 50
+  - _index: 2
+    index: 2
+    _ballsRatioPercentage: 100
+    <requiredBalls>k__BackingField: 75
+  <isSvgLevel>k__BackingField: 1
+  <tube>k__BackingField:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <svgLevel>k__BackingField: {fileID: 4900000, guid: 3072a70c9b76a1b4faea3ef73993020e,
+    type: 3}

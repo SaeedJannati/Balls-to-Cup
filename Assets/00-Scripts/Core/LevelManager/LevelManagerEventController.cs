@@ -8,6 +8,8 @@ namespace BallsToCup.Core.Gameplay
     {
         public readonly ListFuncEvent<(float maxSensitivity, float moveThreshold)>
             onCurrentLevelRotateControllInfoRequest = new();
+        public readonly ListFuncEvent<AssetReference>
+            onSvgLevelBaseTu = new();
         public readonly ListFuncEvent<BallsToCupLevel>
             onCurrentLevelRequest = new();
 
