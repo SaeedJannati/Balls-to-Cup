@@ -104,7 +104,7 @@ namespace BallsToCup.Meta.Levels
             if (pointsOnPath[^1].y < pointsOnPath[0].y)
                 pointsOnPath.Reverse();
             int segments = 8;
-            var geometry = CreateTubeGeometryWithThickness(pointsOnPath.ToArray(), 8.0f,segments ,8f);
+            var geometry = CreateTubeGeometryWithThickness(pointsOnPath.ToArray(), 8.0f,segments ,2f);
 
             var triangles = CreateTopTriangles(geometry.triangles, geometry.vertices, segments);
   
