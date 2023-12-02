@@ -182,7 +182,7 @@ namespace BallsToCup.Meta.Levels
             Vector3[] originalSplinePointArray, float tubeRadius,
             int radialSegmentsCount,float thickness)
         {
-            var innerTubeGeometry = CalculateTubeGeometry(originalSplinePointArray, tubeRadius, radialSegmentsCount);
+            var innerTubeGeometry = CalculateTubeGeometry(originalSplinePointArray, tubeRadius, radialSegmentsCount,true);
             var outerTubeGeometry=CalculateTubeGeometry(originalSplinePointArray, tubeRadius+thickness, radialSegmentsCount);
             var triangles = CombinationOfIntTriangles(innerTubeGeometry.triangles, outerTubeGeometry.triangles,
                 innerTubeGeometry.vertices.Length);
@@ -192,7 +192,7 @@ namespace BallsToCup.Meta.Levels
         }
 
         public (int[] triangles,Vector3[] vertices,Vector2[] uvs) CalculateTubeGeometry(Vector3[] originalSplinePointArray, float tubeRadius,
-            int radialSegmentsCount)
+            int radialSegmentsCount,bool isInnerTube=false)
         {
             var lengthOfSplinePointArray = originalSplinePointArray.Length;
            var splinePointArray = originalSplinePointArray;
@@ -270,21 +270,43 @@ namespace BallsToCup.Meta.Levels
                     uvCurvedSurfaceArea[m * (radialSegmentsCount + 1) + p] = new Vector2(
                         .5f * p * (1f / (radialSegmentsCount + 1)),
                         currentAbsoluteLengthOfSplineInUVPosition);
-                    if (p < radialSegmentsCount && m < lengthOfSplinePointArray - 1)
+                    if (!isInnerTube)
                     {
-                        trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6)] =
-                            m * (radialSegmentsCount + 1) + p;
-                        trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 1] =
-                            (m + 1) * (radialSegmentsCount + 1) + p;
-                        trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 2] =
-                            (m) * (radialSegmentsCount + 1) + p + 1;
+                        if (p < radialSegmentsCount && m < lengthOfSplinePointArray - 1)
+                        {
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6)] =
+                                m * (radialSegmentsCount + 1) + p;
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 1] =
+                                (m + 1) * (radialSegmentsCount + 1) + p;
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 2] =
+                                (m) * (radialSegmentsCount + 1) + p + 1;
 
-                        trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 3] =
-                            (m) * (radialSegmentsCount + 1) + p + 1;
-                        trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 4] =
-                            (m + 1) * (radialSegmentsCount + 1) + p;
-                        trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 5] =
-                            (m + 1) * (radialSegmentsCount + 1) + p + 1;
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 3] =
+                                (m) * (radialSegmentsCount + 1) + p + 1;
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 4] =
+                                (m + 1) * (radialSegmentsCount + 1) + p;
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 5] =
+                                (m + 1) * (radialSegmentsCount + 1) + p + 1;
+                        }
+                    }
+                    else
+                    {
+                        if (p < radialSegmentsCount && m < lengthOfSplinePointArray - 1)
+                        {
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6)] =
+                              (m) * (radialSegmentsCount + 1) + p + 1;
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 1] =
+                                (m + 1) * (radialSegmentsCount + 1) + p;
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 2] =
+                                m * (radialSegmentsCount + 1) + p;
+
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 3] =
+                                (m + 1) * (radialSegmentsCount + 1) + p + 1;
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 4] =
+                                (m + 1) * (radialSegmentsCount + 1) + p;
+                            trianglesCurvedSurfaceArea[m * (radialSegmentsCount * 6) + (p * 6) + 5] =
+                                (m) * (radialSegmentsCount + 1) + p + 1;
+                        }
                     }
                 }
             }
