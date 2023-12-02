@@ -23,3 +23,5 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   <tubeRadius>k__BackingField: 8
   <radialSegmentsCount>k__BackingField: 8
+  <bezierSegmentPoinstCount>k__BackingField: 10
+  <svgFilesPath>k__BackingField: 03-Arts/Core/LevelsSvgs
