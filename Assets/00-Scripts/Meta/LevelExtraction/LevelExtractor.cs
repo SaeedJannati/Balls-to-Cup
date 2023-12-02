@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using Unity.VectorGraphics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BallsToCup.Meta.Levels
@@ -19,7 +20,7 @@ namespace BallsToCup.Meta.Levels
         [SerializeField] private List<TextAsset> _levels;
         [SerializeField] private GameObject _pointOnPath;
         [SerializeField] private Material _material;
-
+        [SerializeField] private TubeComposite _tubeCompositePrefab;
         #endregion
 
         #region Methods
@@ -103,12 +104,13 @@ namespace BallsToCup.Meta.Levels
 
             if (pointsOnPath[^1].y < pointsOnPath[0].y)
                 pointsOnPath.Reverse();
-            int segments = 8;
-            var geometry = CreateTubeGeometryWithThickness(pointsOnPath.ToArray(), 8.0f,segments ,2f);
+            int radialSegmentsCount = 8;
+            var geometry = CreateTubeGeometryWithThickness(pointsOnPath.ToArray(), 8.0f,radialSegmentsCount ,2f);
 
-            var triangles = CreateTopTriangles(geometry.triangles, geometry.vertices, segments);
+            var triangles = CreateTopTriangles(geometry.triangles, geometry.vertices, radialSegmentsCount);
   
-            CreateTube(triangles, geometry.vertices, geometry.uvs);
+        var tube=    CreateTube(triangles, geometry.vertices, geometry.uvs,radialSegmentsCount);
+        GameObject.Instantiate(_tubeCompositePrefab).AttachTube(tube);
         }
 
         public int[] CreateTopTriangles  (int[] origTriangles,Vector3[] vertices,int segments)
@@ -194,6 +196,7 @@ namespace BallsToCup.Meta.Levels
         public (int[] triangles,Vector3[] vertices,Vector2[] uvs) CalculateTubeGeometry(Vector3[] originalSplinePointArray, float tubeRadius,
             int radialSegmentsCount,bool isInnerTube=false)
         {
+            var PI = Mathf.PI;
             var lengthOfSplinePointArray = originalSplinePointArray.Length;
            var splinePointArray = originalSplinePointArray;
            var splineDirectionalVectors = new Vector3[lengthOfSplinePointArray];
@@ -243,7 +246,8 @@ namespace BallsToCup.Meta.Levels
                 {
                     if (splineInterpolatedDirectionalVectors[0].normalized == upstandingVector.normalized)
                     {
-                        upstandingVector = new Vector3(1.11f, 2.222222f, 0.0f);
+                        //set it to something so cross product wont turn out to be vector3.zero
+                        upstandingVector = new Vector3(1, 0, 0.0f);
                     }
                 }
 
@@ -265,8 +269,8 @@ namespace BallsToCup.Meta.Levels
                 for (int p = 0; p < radialSegmentsCount + 1; p++)
                 {
                     verticesCurvedSurfaceArea[m * (radialSegmentsCount + 1) + p] = splinePointArray[m]
-                        + tubeRadius * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)) * splineVectorU[m]
-                        + tubeRadius * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)) * splineVectorV[m];
+                        + tubeRadius * Mathf.Cos(p * 2f * (PI / radialSegmentsCount)) * splineVectorU[m]
+                        + tubeRadius * Mathf.Sin(p * 2f * (PI/ radialSegmentsCount)) * splineVectorV[m];
                     uvCurvedSurfaceArea[m * (radialSegmentsCount + 1) + p] = new Vector2(
                         .5f * p * (1f / (radialSegmentsCount + 1)),
                         currentAbsoluteLengthOfSplineInUVPosition);
@@ -317,10 +321,10 @@ namespace BallsToCup.Meta.Levels
             return (trianglesAll, verticesAll, uvAll);
         }
 
-        GameObject CreateTube(int[] triangles,Vector3[] vertices,Vector2[] uvs)
+        GameObject CreateTube(int[] triangles,Vector3[] vertices,Vector2[] uvs,int radialSegmentsCount)
         {
             Mesh currentMesh;
-            var currentTube = new GameObject("tube");
+            var currentTube = new GameObject("Tube");
             currentTube.AddComponent<MeshRenderer>();
             currentMesh = currentTube.AddComponent<MeshFilter>().mesh;
             currentMesh.Clear();
@@ -334,7 +338,16 @@ namespace BallsToCup.Meta.Levels
             currentMesh.RecalculateNormals();
             currentMesh.RecalculateBounds();
             currentTube.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            return currentTube;
+            var tubeParent = new GameObject("TubeParent");
+            var tubeParentPos = Vector3.zero;
+            for (int i = 0; i < radialSegmentsCount; i++)
+            {
+                tubeParentPos += currentMesh.vertices[^(i+1)]/radialSegmentsCount;
+            }
+            tubeParent.transform.position = tubeParentPos;
+            currentTube.transform.SetParent(tubeParent.transform);
+            currentTube.AddComponent<MeshCollider>();
+            return tubeParent;
         }
 
         private int[] CombinationOfIntTriangles(int[] first, int[] second, int offset)
@@ -361,60 +374,3 @@ namespace BallsToCup.Meta.Levels
 
 
 
-// Vector3[] verticesTopLid = new Vector3[radialSegmentsCount + 1];
-            // Vector2[] uvTopLid = new Vector2[verticesTopLid.Length];
-            // int[] trianglesTopLid = new int[radialSegmentsCount * 3];
-            //
-            // verticesTopLid[0] = splinePointArray[splinePointArray.Length - 1];
-            // uvTopLid[0] = new Vector2(7f * .125f, 7f * .125f);
-
-            // for (int p = 0; p < radialSegmentsCount; p++)
-            // {
-            //     verticesTopLid[1 + p] = splinePointArray[splinePointArray.Length - 1] +
-            //                             tubeRadius * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)) *
-            //                             splineVectorU[splinePointArray.Length - 1]
-            //                             + tubeRadius * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)) *
-            //                             splineVectorV[splinePointArray.Length - 1];
-            //     uvTopLid[1 + p] = new Vector2(
-            //         7f * 0.125f + .125f * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)),
-            //         7f * 0.125f + .125f * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)));
-            //     trianglesTopLid[p * 3] = 1 + ((p + 1) % radialSegmentsCount);
-            //     trianglesTopLid[p * 3 + 1] = 1 + (p % radialSegmentsCount);
-            //     trianglesTopLid[p * 3 + 2] = 0;
-            // }
-
-
-            // Vector3[] verticesBottomLid = new Vector3[radialSegmentsCount + 1];
-            // Vector2[] uvBottomLid = new Vector2[verticesBottomLid.Length];
-            // int[] trianglesBottomLid = new int[radialSegmentsCount * 3];
-            // verticesBottomLid[0] = splinePointArray[0];
-            // uvBottomLid[0] = new Vector2(7f * 0.125f, 7f * .125f);
-
-            // for (int p = 0; p < radialSegmentsCount; p++)
-            // {
-            //     verticesBottomLid[1 + p] = splinePointArray[0] +
-            //                                tubeRadius * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)) *
-            //                                splineVectorU[0]
-            //                                + tubeRadius * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)) *
-            //                                splineVectorV[0];
-            //
-            //     uvBottomLid[1 + p] = new Vector2(
-            //         7f * .125f + .125f * Mathf.Cos(p * 2f * (3.1415f / radialSegmentsCount)),
-            //         7f * .125f + .125f * Mathf.Sin(p * 2f * (3.1415f / radialSegmentsCount)));
-            //     trianglesBottomLid[p * 3] = 1 + (p % radialSegmentsCount);
-            //     trianglesBottomLid[p * 3 + 1] = 1 + ((p + 1) % radialSegmentsCount);
-            //     trianglesBottomLid[p * 3 + 2] = 0;
-            // }
-            
-            
-            
-            
-            
-// int[] trianglesAll =
-//     combination_of_int_triangles(trianglesTopLid, trianglesBottomLid, verticesTopLid.Length);
-// Vector3[] verticesAll = verticesTopLid.Concat(verticesBottomLid).ToArray();
-// Vector2[] uvAll = uvTopLid.Concat(uvBottomLid).ToArray();
-
-// trianglesAll = combination_of_int_triangles(trianglesAll, trianglesCurvedSurfaceArea, verticesAll.Length);
-// verticesAll = verticesAll.Concat(verticesCurvedSurfaceArea).ToArray();
-// uvAll = uvAll.Concat(uvCurvedSurfaceArea).ToArray();

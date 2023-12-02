@@ -3,6 +3,7 @@ using NaughtyAttributes;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace BallsToCup.Core.Gameplay
 {
@@ -10,6 +11,7 @@ namespace BallsToCup.Core.Gameplay
     {
         #region Properties
 
+        [field: SerializeField] public AssetReference tubeCompositeReference{ get; private set; } = new();
         [field: SerializeField, Expandable] public List<BallsToCupLevel> levels { get; private set; } = new();
 
         #endregion

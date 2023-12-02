@@ -159,8 +159,9 @@ MonoBehaviour:
   - {fileID: 4900000, guid: da3d4f1e50db3404886270b3d1284448, type: 3}
   _pointOnPath: {fileID: 7028591611953721281, guid: 5517f6a4d861ac34286e92f998edc53f,
     type: 3}
-  _material: {fileID: 2100000, guid: 4e1232011add721449070b03f1b30c85, type: 2}
-  _container: {fileID: 0}
+  _material: {fileID: 2100000, guid: 6d46d42fe82c32048bfa4d95fae7081e, type: 2}
+  _tubeCompositePrefab: {fileID: 7175385518753717260, guid: 7b66717302a02e546b630570d864954f,
+    type: 3}
 --- !u!4 &29763200
 Transform:
   m_ObjectHideFlags: 0
