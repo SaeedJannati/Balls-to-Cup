@@ -1,4 +1,5 @@
 using BallsToCup.Core.Gameplay;
+using BallsToCup.Meta.Levels;
 using BallsToCupGeneral.Audio;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
@@ -15,6 +16,8 @@ namespace BallsToCup.General.Editor
             "Assets/04-Models/Core/LevelManger/LevelManagerModel.asset";
         private const string audiohandlerModelPath =
             "Assets/04-Models/General/AudioSystem/AudioHandlerModel.asset";
+        private const string levelExtractionModelPath =
+            "Assets/04-Models/Meta/LevelExtractor/LevelExtractorModel.asset";
         #endregion
 
         #region Methods
@@ -32,6 +35,8 @@ namespace BallsToCup.General.Editor
             _menuTree.Add("Level editor", buildSettings);
             var audioHandlerModel = AssetDatabase.LoadAssetAtPath(audiohandlerModelPath, typeof(AudioHandlerModel));
             _menuTree.Add("Audio Handler", audioHandlerModel);
+            var levelExtractionModel = AssetDatabase.LoadAssetAtPath(levelExtractionModelPath, typeof(LevelExtractorModel));
+            _menuTree.Add("Svg level extractor ", levelExtractionModel);
             return _menuTree;
         }
 

@@ -42,7 +42,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     mixerGroup: {fileID: 4429800488830299793, guid: 2a76cb19b8ebcfa4d9de695af0728224,
       type: 2}
-    volume: 0.74
+    volume: 0.42
   - clipName: Win
     clipReference:
       m_AssetGUID: 900e0555ab6dc2c42ac606abb4c5544b

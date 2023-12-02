@@ -3,6 +3,7 @@ using NaughtyAttributes;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace BallsToCup.Core.Gameplay
 {
