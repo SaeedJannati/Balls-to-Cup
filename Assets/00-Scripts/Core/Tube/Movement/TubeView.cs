@@ -1,14 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using BallsToCup.Core;
-using BallsToCup.Core.Gameplay;
+using System.Linq;
 using BallsToCup.General;
-using Sirenix.OdinInspector;
+using BallsToCup.Meta.Levels;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Serialization;
-using Zenject;
 
 namespace BallsToCup.Core
 {
@@ -17,23 +11,23 @@ namespace BallsToCup.Core
         #region Fields
 
         [field: SerializeField] public Transform tubePivot { get; private set; }
+        [SerializeField] private Transform tubeParent;
         private Rigidbody _rigidbody;
-        [SerializeField] private MeshRenderer _meshRenderer;
         private TubeEventController _eventController;
         private float _deltaAngle;
         private float _maxRotVelocity;
-
+        private Vector3 _boundsMin;
+        private Vector3 _boundsMax;
         #endregion
 
         #region Unity actions
+
         private void Awake()
         {
             TryGetComponent(out _rigidbody);
         }
-        private void Start()
-        {
-            RegisterToEvents();
-        }
+
+    
 
         private void OnDestroy()
         {
@@ -44,11 +38,11 @@ namespace BallsToCup.Core
         {
             var deltaTime = Time.fixedDeltaTime;
             var velocity = _deltaAngle / deltaTime;
-            
-            if (velocity*velocity > _maxRotVelocity*_maxRotVelocity)
+
+            if (velocity * velocity > _maxRotVelocity * _maxRotVelocity)
             {
                 var sign = velocity > 0 ? 1 : -1;
-                _deltaAngle = _maxRotVelocity * deltaTime*sign;
+                _deltaAngle = _maxRotVelocity * deltaTime * sign;
             }
 
             var deltaRot =
@@ -61,6 +55,20 @@ namespace BallsToCup.Core
         #endregion
 
         #region Methods
+
+        public void Initialise()
+        {
+            RegisterToEvents();
+            GetRenderersBounds();
+        }
+
+
+        public void SetTube(TubeComposite tube)
+        {
+            var tubeTransform = tube.gameObject.transform;
+            tubeTransform.SetParent(tubeParent);
+            tubeTransform.localPosition = Vector3.zero;
+        }
 
         public void AddToDeltaAngle(float deltaAngle)
         {
@@ -89,9 +97,22 @@ namespace BallsToCup.Core
             _eventController.onTubeBoundsRequest.Remove(OnTubeBoundsRequest);
         }
 
+        void GetRenderersBounds()
+        {
+            var bounds = GetComponentsInChildren<MeshRenderer>()?.Select(i=>i.bounds);
+            if(bounds==default)
+                return;
+            _boundsMax.x = bounds.Max(i => i.max.x);
+            _boundsMax.y= bounds.Max(i => i.max.y);
+            _boundsMax.z=bounds.Max(i => i.max.z);
+            _boundsMin.x = bounds.Min(i => i.min.x);
+            _boundsMin.y= bounds.Min(i => i.min.y);
+            _boundsMin.z=bounds.Min(i => i.min.z);
+        }
+
         private (Vector3 min, Vector3 max) OnTubeBoundsRequest()
         {
-            return (_meshRenderer.bounds.min, _meshRenderer.bounds.max);
+            return (_boundsMin, _boundsMax);
         }
 
         #endregion
